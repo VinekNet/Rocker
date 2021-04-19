@@ -1,4 +1,6 @@
  https://vineknet.github.io/rocker/
+//LIRE EN RAW OU EN BLAME POUR UNE MEILLEURE LISIBILITÉ//
+
 
 Déplacements : 
 Fonctionnels (pas optimals), j'ai besoin de retravailler l'érgonomie de déplacement (ex: faire du gauche-droite de manière plus fluide/sans coupure)
