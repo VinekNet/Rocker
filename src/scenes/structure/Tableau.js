@@ -24,7 +24,7 @@ class Tableau extends Phaser.Scene{
         this.load.audio('pick', 'assets/coin.wav');
         this.load.spritesheet('player',
             'assets/player.png',
-            { frameWidth: 32, frameHeight: 48  }
+            { frameWidth: 43, frameHeight: 64  }
         );
     }
     create(){
