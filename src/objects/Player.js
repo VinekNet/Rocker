@@ -11,6 +11,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         this.setDisplaySize(64,110);
         this.setBodySize(this.body.width,this.body.height);
         this.setOffset(0, 0);
+        this.sens = 1;
 
         this.anims.create({
             key: 'left',
@@ -58,11 +59,26 @@ class Player extends Phaser.Physics.Arcade.Sprite{
      * Déplace le joueur en fonction des directions données
      */
     move(){
-        
+        switch (true) {
+            case this._directionX < 0:
+                this.sens = -1;
+                this.setVelocityX(-160);
+                this.anims.play('left', true);
+                break;
+            case this._directionX > 0:
+                this.sens = 1;
+                this.setVelocityX(160);
+                this.anims.play('right', true);
+                break;
+            default:
+                this.setVelocityX(0);
+            // this.anims.play('stance', true);
+            //this.anims.play(this.sens===-1 ? 'back' : 'stance' ,true); //équivalent d'un if, pour mémoriser la position du personnage pour qu'il regarde à gauche ou à droite en fonction du dernier déplacement effectué
+        }
         
 
 
-        switch (true){
+        /*switch (true){
             case this._directionX<0:
                 this.setVelocityX(-160);
                 this.anims.play('left', true);
@@ -75,7 +91,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
             default:
                 this.setVelocityX(0);
                 this.anims.play('turn');
-        }
+        }*/
 
         if(this._directionY<0){
             if(this.body.blocked.down || this.body.touching.down){
@@ -96,6 +112,13 @@ class Player extends Phaser.Physics.Arcade.Sprite{
             
           }
     }*/
+    shoot() {
+        var bullet = new Shoot(this.scene, this.x, this.y);
+        console.log("Tir");
+        setTimeout(function () {
+            bullet.destroy();
+        }, 1500);
+    }
 
 
 }

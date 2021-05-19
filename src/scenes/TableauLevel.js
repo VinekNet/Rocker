@@ -12,6 +12,7 @@ class TableauLevel extends Tableau{
         this.load.image('platforms', 'assets/plateforme1.png');
         this.load.image('monster-pattern', 'assets/' + randImage + '.png');
         this.load.image('twomp', 'assets/twompmonstre.png');
+        this.load.image('tir', 'assets/concombre.png');
 
     }
     create() {

@@ -67,5 +67,8 @@ class Twomp extends ObjetEnnemi{
             }
         });
     }
+    Tmortlol() {
+        this.disableBody(true, true);
+    }
 
 }

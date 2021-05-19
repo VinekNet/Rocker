@@ -3,8 +3,9 @@
     "",
     "\\src",
     "\\src\\objects",
-    "\\src\\scenes"
+    "\\src\\scenes",
+    "\\src\\scenes\\structure"
   ],
-  "SelectedNode": "\\main.js",
+  "SelectedNode": "\\src\\scenes\\structure\\Tableau.js",
   "PreviewInSolutionExplorer": false
 }

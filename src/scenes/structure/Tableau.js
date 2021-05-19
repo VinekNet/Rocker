@@ -24,7 +24,7 @@ class Tableau extends Phaser.Scene{
         this.load.audio('pick', 'assets/coin.wav');
         this.load.spritesheet('player',
             'assets/player.png',
-            { frameWidth: 43, frameHeight: 64  }
+            { frameWidth: 36, frameHeight: 64  }
         );
     }
     create(){
@@ -57,13 +57,19 @@ class Tableau extends Phaser.Scene{
         this.boom.visible=false;
         this.boom.setDepth(1000);  
         
-        
+        this.boutonTir = this.input.keyboard.addKey('A');
     }
     update(){
         super.update();
         this.player.move();
+        this.tirPlayer();
     }
 
+    tirPlayer() {
+        if (Phaser.Input.Keyboard.JustDown(this.boutonTir)) {
+            this.player.shoot();
+        }
+    }
     /**
      *
      * @param {Sprite} object Objet qui saigne
