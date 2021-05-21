@@ -1,4 +1,4 @@
-class Ui extends Phaser.Scene{
+ class Ui extends Phaser.Scene{
     constructor ()
     {
         super({ key: 'ui', active: true });
