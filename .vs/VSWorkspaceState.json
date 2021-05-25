@@ -4,9 +4,10 @@
     "\\assets",
     "\\src",
     "\\src\\objects",
+    "\\src\\objects\\ui",
     "\\src\\scenes",
     "\\src\\scenes\\structure"
   ],
-  "SelectedNode": "\\src\\objects\\Player.js",
+  "SelectedNode": "\\src\\scenes\\structure\\Tableau.js",
   "PreviewInSolutionExplorer": false
 }

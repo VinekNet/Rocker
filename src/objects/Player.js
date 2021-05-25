@@ -46,7 +46,11 @@ class Player extends Phaser.Physics.Arcade.Sprite{
             frames: [{ key: 'JUMP', frame: 2 }],
             frameRate: 4
         });
-
+        this.anims.create({
+            key: 'jumpback',
+            frames: [{ key: 'JUMPB', frame: 2 }],
+            frameRate: 4
+        });
 
         this._directionX=0;
         this._directionY=0;
@@ -95,19 +99,27 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         
 
         if (this._directionY < 0) {
-            if (this.body.blocked.down || this.body.touching.down) {
+            if (this.body.blocked.down) {
                 this.setVelocityY(-550);
 
             }
             else {
-                this.anims.play('jump', true);
+                if (this.sens == -1) {
+                    this.anims.play('jumpback', true);
+                }
+                else { this.anims.play('jump', true); }
             }
         }
         else {
-            if (this.body.blocked.down || this.body.touching.down) {
+            if (this.body.blocked.down ) {
 
             }
-            else { this.anims.play('jump', true); }
+            else {
+                if (this.sens == -1) {
+                    this.anims.play('jumpback', true);
+                }
+                else {this.anims.play('jump', true)}
+            }
         }
 
 
@@ -115,7 +127,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
     }
 
     shoot() {
-        var bullet = new Shoot(this.scene, this.x, this.y);
+        var bullet = new Shoot(this.scene, this.x+20*this.sens, this.y-10);
         console.log("Tir");
         setTimeout(function () {
             bullet.destroy();

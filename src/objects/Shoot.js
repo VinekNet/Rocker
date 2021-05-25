@@ -5,7 +5,7 @@ class Shoot extends ObjetPhysique {
         scene.physics.add.existing(this);
 
         this.body.allowGravity = false;
-        this.setDisplaySize(200, 100);
+        this.setDisplaySize(32, 16);
         this.setBodySize(this.body.width, this.body.height);
 
         this.setVelocityX(450 * scene.player.sens);

@@ -38,6 +38,10 @@ class Tableau extends Phaser.Scene{
             'assets/jump.png',
             { frameWidth: 44, frameHeight: 64 }
         );
+        this.load.spritesheet('JUMPB',
+            'assets/jumpback.png',
+            { frameWidth: 44, frameHeight: 64 }
+        );
     }
     create(){
         Tableau.current=this;
