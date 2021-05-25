@@ -74,16 +74,28 @@ class Tableau extends Phaser.Scene{
         this.boom.setDepth(1000);  
         
         this.boutonTir = this.input.keyboard.addKey('A');
+        this.boutonShield = this.input.keyboard.addKey('Z');
+        this.boutonRamp = this.input.keyboard.addKey('E');
+        ui.updateEnergy();
     }
     update(){
         super.update();
         this.player.move();
-        this.tirPlayer();
+        this.capacityPlayer();
     }
 
-    tirPlayer() {
+    capacityPlayer() {
         if (Phaser.Input.Keyboard.JustDown(this.boutonTir)) {
             this.player.shoot();
+            ui.updateEnergy();
+        }
+        if (Phaser.Input.Keyboard.JustDown(this.boutonShield)) {
+            this.player.shield();
+            ui.updateEnergy();
+        }
+        if (Phaser.Input.Keyboard.JustDown(this.boutonRamp)) {
+            this.player.ramp();
+            ui.updateEnergy();
         }
     }
     /**

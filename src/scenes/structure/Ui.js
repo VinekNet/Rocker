@@ -1,4 +1,4 @@
- class Ui extends Phaser.Scene{
+   class Ui extends Phaser.Scene{
     constructor ()
     {
         super({ key: 'ui', active: true });
@@ -6,6 +6,8 @@
     }
     preload(){
         this.load.image('ui/full-screen-icon', 'assets/ui/full-screen.png');
+        this.load.image('energyContainer', 'assets/ui/stormEmpty.png');
+        this.load.image('energyFilled', 'assets/ui/stormFull.png');
     }
     create (){
         console.log("create Ui")
@@ -87,13 +89,23 @@
         btFs.x=this.sys.canvas.width;
         btFs.y=this.sys.canvas.height;
 
+        this.energyFill = this.physics.add.sprite(43, 125+60, 'energyFilled');
+        this.energyFill.body.enable = false;
+        this.energyFill.setOrigin(0, 1);
+        this.containerEnergy = this.physics.add.sprite(75, 125, 'energyContainer');
+        this.containerEnergy.body.enable = false;
     }
 
     gagne(points=10)
     {
         this.score+=points;
         this._scoreText.setText('Score: ' + this.score);
-    }
+       }
+
+       updateEnergy() {
+           this.energyFill.scaleY = Tableau.current.player.energy/50;
+       }
+
     update(){
         if(Tableau.current){
             this._tableauText.setText(Tableau.current.scene.key);

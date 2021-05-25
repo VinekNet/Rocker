@@ -49,12 +49,13 @@ class Twomp extends ObjetEnnemi{
                 onComplete: function () {
                     me.start();
                 }
-            })
+        })
+        this.tweenMouvement;
 
     }
 
     start(){
-        this.scene.tweens.add({
+        this.tweenMouvement = this.scene.tweens.add({
             targets: this,
             y: {
                 from: this.minY,
@@ -69,6 +70,14 @@ class Twomp extends ObjetEnnemi{
     }
     Tmortlol() {
         this.disableBody(true, true);
+    }
+
+    Shiled() {
+        this.tweenMouvement.setTimeScale(-1);
+        let here = this;
+        setTimeout(function () {
+            here.tweenMouvement.setTimeScale(1);
+        }, 500);
     }
 
 }

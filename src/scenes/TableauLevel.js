@@ -13,7 +13,9 @@ class TableauLevel extends Tableau{
         this.load.image('monster-pattern', 'assets/' + randImage + '.png');
         this.load.image('twomp', 'assets/twompmonstre.png');
         this.load.image('tir', 'assets/concombre.png');
+        this.load.image('shield', 'assets/shield.png');
         this.load.image('lim', 'assets/lim.png');
+        this.load.image('ramp', 'assets/rampe.png');
 
     }
     create() {
@@ -87,11 +89,19 @@ class TableauLevel extends Tableau{
             this.physics.add.collider(this.platforms, this.stars);
             this.physics.add.overlap(this.player, this.stars, this.ramasserEtoile, null, this);
         //6: se retourne avant le mur
-    new LIM(this,700,height+60);
-    new MonsterTest(this,1100,height+60);
-    new MonsterTest(this,1600,height+60);
-    new Twomp(this,450,300);
-    new Twomp(this,1250,300);
+        this.monsters = new Array();
+        this.monster = new LIM(this, 700, height + 60);
+        this.monster1 = new MonsterTest(this,1100,height+60);
+        this.monster2 = new MonsterTest(this,1600,height+60);
+        this.monster3 = new Twomp(this,450,300);
+        this.monster4 = new Twomp(this, 1250, 300);
+
+        this.monsters.push(this.monster);
+        this.monsters.push(this.monster1);
+        this.monsters.push(this.monster2);
+        this.monsters.push(this.monster3);
+        this.monsters.push(this.monster4);
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //new Ramp(this,300,605);
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////

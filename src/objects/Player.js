@@ -3,7 +3,6 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         super(scene, x, y, "player")
         scene.add.existing(this)
         scene.physics.add.existing(this)
-
         this.setCollideWorldBounds(true)
         this.setBounce(0.);
         this.setGravityY(850)
@@ -12,6 +11,8 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         this.setBodySize(this.body.width,this.body.height);
         this.setOffset(0, 0);
         this.sens = 1;
+        this.ramped = false;
+        this.rampActiv;
 
         this.anims.create({
             key: 'left',
@@ -54,7 +55,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
 
         this._directionX=0;
         this._directionY=0;
-
+        this.energy = 50;
 
     }
 
@@ -68,11 +69,13 @@ class Player extends Phaser.Physics.Arcade.Sprite{
     /**
      * arrête le joueur
      */
-    stop(){
-        this.setVelocityX(0);
-        this.setVelocityY(0);   
-        this.directionY=0;
-        this.directionX=0;
+    stop() {
+        if (this.ramped == false) {
+            this.setVelocityX(0);
+            this.setVelocityY(0);
+            this.directionY = 0;
+            this.directionX = 0;
+        }
     }
 
     /**
@@ -92,14 +95,16 @@ class Player extends Phaser.Physics.Arcade.Sprite{
                 break;
 
             default:
-                this.setVelocityX(0);
-                this.anims.play('stance', true);
-                this.anims.play(this.sens===-1 ? 'back' : 'stance' ,true);
+                if (this.ramped == false) {
+                    this.setVelocityX(0);
+                    this.anims.play('stance', true);
+                    this.anims.play(this.sens === -1 ? 'back' : 'stance', true);
+                }
         }
         
 
         if (this._directionY < 0) {
-            if (this.body.blocked.down) {
+            if (this.body.blocked.down && this.ramped == false) {
                 this.setVelocityY(-550);
 
             }
@@ -127,11 +132,43 @@ class Player extends Phaser.Physics.Arcade.Sprite{
     }
 
     shoot() {
-        var bullet = new Shoot(this.scene, this.x+20*this.sens, this.y-10);
-        console.log("Tir");
+        if (this.energy >= 5) {
+            var bullet = new Shoot(this.scene, this.x + 20 * this.sens, this.y - 10);
+            console.log("Tir");
+            setTimeout(function () {
+                bullet.destroy();
+            }, 1500);
+            this.energy -= 5;
+        }
+    }
+
+    shield() {
+        if (this.energy >= 10) {
+            var shield = new Shield(this.scene, this.x +50 * this.sens, this.y - 10);
+            console.log("Shield");
+            setTimeout(function () {
+                shield.destroy();
+            }, 5000);
+            this.energy -= 10;
+        }
+    }
+
+    ramp() {
+        if (this.energy >= 25) {
+            this.rampActiv = new Ramp(this.scene, this.x + 126 * this.sens, this.y + 25);
+            console.log("Rampe");
+            this.energy -= 25;
+        }
+    }
+
+    boostRamp() {
+        this.body.setVelocityX(1000);
+        this.body.setVelocityY(-400);
+        console.log(this.body.velocity);
+        let here = this;
         setTimeout(function () {
-            bullet.destroy();
-        }, 1500);
+            here.rampActiv.destroy();
+        }, 500);
     }
 
 

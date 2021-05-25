@@ -50,11 +50,11 @@ class LIM extends ObjetEnnemi {
                 me.start();
             }
         })
-
+        this.tweenMouvement;
     }
 
     start() {
-        this.scene.tweens.add({
+        this.tweenMouvement = this.scene.tweens.add({
             targets: this,
             x: {
                 from: this.minX,
@@ -73,6 +73,14 @@ class LIM extends ObjetEnnemi {
                 repeat: -1
             }
         });
+    }
+
+    Shiled() {
+        this.tweenMouvement.setTimeScale(-1);
+        let here = this;
+        setTimeout(function () {
+            here.tweenMouvement.setTimeScale(1);
+        }, 500);
     }
 
 }
