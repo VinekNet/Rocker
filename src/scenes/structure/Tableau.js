@@ -2,7 +2,7 @@
  * Toutes les fonctions propres à un tableau dans notre jeu.
  * Cette classe n'est pas à utiliser directement, elle doit être extend !
  */
-class Tableau extends Phaser.Scene{
+class Tableau extends Phaser.Scene {
     /**
      *
      * @param {String} key identifiant de la scène à jouer
@@ -14,7 +14,7 @@ class Tableau extends Phaser.Scene{
     /**
      * Par défaut on charge un fond et le player
      */
-    preload(){
+    preload() {
         this.load.image('sky', 'assets/fond.png');
         this.load.image('spike', 'assets/spike.png');
         this.load.image('boom', 'assets/kaboom.png');
@@ -24,7 +24,7 @@ class Tableau extends Phaser.Scene{
         this.load.audio('pick', 'assets/coin.wav');
         this.load.spritesheet('player',
             'assets/player.png',
-            { frameWidth: 40, frameHeight: 64  }
+            { frameWidth: 40, frameHeight: 64 }
         );
         this.load.spritesheet('idle',
             'assets/idle.png',
@@ -43,42 +43,43 @@ class Tableau extends Phaser.Scene{
             { frameWidth: 44, frameHeight: 64 }
         );
     }
-    create(){
-        Tableau.current=this;
+    create() {
+        Tableau.current = this;
         this.sys.scene.scale.lockOrientation("landscape")
         this.sound.add('ded');
         this.sound.add('kill');
         this.sound.add('pick');
         this.mood = this.sound.add('zik');
-        this.mood.loop=true;
+        this.mood.loop = true;
         this.mood.play();
-        
-        console.log("On est sur "+this.constructor.name+" / "+this.scene.key);
+
+        console.log("On est sur " + this.constructor.name + " / " + this.scene.key);
         /**
          * Le ciel en fond
          * @type {Phaser.GameObjects.Image}
          */
-        this.sky=this.add.image(0, 0, 'sky').setOrigin(0,0);
-        this.sky.displayWidth=14*64;
-        this.sky.setScrollFactor(0,0);
+        this.sky = this.add.image(0, 0, 'sky').setOrigin(0, 0);
+        this.sky.displayWidth = 14 * 64;
+        this.sky.setScrollFactor(0, 0);
         /**
          * Le joueur
          * @type {Player}
          */
-        this.player=new Player(this,128,0);
+        this.player = new Player(this, 128, 0);
 
-        this.boom=this.add.sprite(this.sys.canvas.width/2,this.sys.canvas.height/2,"boom")
-        this.boom.displayWidth=64;
-        this.boom.displayHeight=64;
-        this.boom.visible=false;
-        this.boom.setDepth(1000);  
-        
+        this.boom = this.add.sprite(this.sys.canvas.width / 2, this.sys.canvas.height / 2, "boom")
+        this.boom.displayWidth = 64;
+        this.boom.displayHeight = 64;
+        this.boom.visible = false;
+        this.boom.setDepth(1000);
+
+
         this.boutonTir = this.input.keyboard.addKey('A');
         this.boutonShield = this.input.keyboard.addKey('Z');
         this.boutonRamp = this.input.keyboard.addKey('E');
         ui.updateEnergy();
     }
-    update(){
+    update() {
         super.update();
         this.player.move();
         this.capacityPlayer();

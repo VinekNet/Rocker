@@ -13,7 +13,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         this.sens = 1;
         this.ramped = false;
         this.rampActiv;
-
+        this.key = 'default';
         this.anims.create({
             key: 'left',
             frames: this.anims.generateFrameNumbers('player', { start: 0, end: 7 }),
@@ -81,27 +81,29 @@ class Player extends Phaser.Physics.Arcade.Sprite{
     /**
      * Déplace le joueur en fonction des directions données
      */
-    move(){
-        switch (true) {
-            case this._directionX < 0:
-                this.sens = -1;
-                this.setVelocityX(-200);
-                this.anims.play('left', true);
-                break;
-            case this._directionX > 0:
-                this.sens = 1;
-                this.setVelocityX(200); 
-                this.anims.play('right', true);
-                break;
+    move() {
 
-            default:
-                if (this.ramped == false) {
-                    this.setVelocityX(0);
-                    this.anims.play('stance', true);
-                    this.anims.play(this.sens === -1 ? 'back' : 'stance', true);
-                }
+        if (this._directionX < 0) {
+            this.sens = -1;
+            this.setVelocityX(-200);
+            this.anims.play('left', true);
         }
-        
+        else if (this._directionX > 0) {
+            this.sens = 1;
+            this.setVelocityX(200);
+            this.anims.play('right', true);
+        }
+
+        else {
+            if (this.ramped == false) {
+                this.setVelocityX(0);
+                this.anims.play('stance', true);
+                this.anims.play(this.sens === -1 ? 'back' : 'stance', true);
+            }
+        }
+
+
+
 
         if (this._directionY < 0) {
             if (this.body.blocked.down && this.ramped == false) {
@@ -116,20 +118,22 @@ class Player extends Phaser.Physics.Arcade.Sprite{
             }
         }
         else {
-            if (this.body.blocked.down ) {
+            if (this.body.blocked.down) {
 
             }
             else {
                 if (this.sens == -1) {
                     this.anims.play('jumpback', true);
                 }
-                else {this.anims.play('jump', true)}
+                else { this.anims.play('jump', true); }
             }
         }
-
-
-
     }
+    
+
+
+
+    
 
     shoot() {
         if (this.energy >= 5) {
@@ -162,8 +166,8 @@ class Player extends Phaser.Physics.Arcade.Sprite{
     }
 
     boostRamp() {
-        this.body.setVelocityX(1000);
-        this.body.setVelocityY(-400);
+        this.body.setVelocityX(200000);
+        this.body.setVelocityY(-500);
         console.log(this.body.velocity);
         let here = this;
         setTimeout(function () {
