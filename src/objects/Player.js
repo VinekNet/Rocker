@@ -82,7 +82,44 @@ class Player extends Phaser.Physics.Arcade.Sprite{
      * Déplace le joueur en fonction des directions données
      */
     move() {
+        /*scene.input.keyboard.on('keydown', function (kevent) {
+            switch (kevent.key) {
+                case "ArrowRight":
+                    Tableau.current.player.directionX = 1;
+                    break;
 
+                case "ArrowLeft":
+                    Tableau.current.player.directionX = -1;
+                    break;
+
+                case "ArrowUp":
+                    Tableau.current.player.directionY = -1;
+                    break;
+
+                case "ArrowDown":
+                    Tableau.current.player.directionY = 1;
+                    break;
+            }
+        });
+        scene.input.keyboard.on('keyup', function (kevent) {
+            switch (kevent.key) {
+                case "ArrowRight":
+                    Tableau.current.player.directionX = 0;
+                    break;
+
+                case "ArrowLeft":
+                    Tableau.current.player.directionX = 0;
+                    break;
+
+                case "ArrowUp":
+                    Tableau.current.player.directionY = 0;
+                    break;
+
+                case "ArrowDown":
+                    Tableau.current.player.directionY = 0;
+                    break;
+            }
+        });*/
         if (this._directionX < 0) {
             this.sens = -1;
             this.setVelocityX(-200);

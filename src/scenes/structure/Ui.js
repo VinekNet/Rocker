@@ -69,9 +69,14 @@
 
 
         let pad=new GamePad(this,0,0);
-        pad.x=this.sys.canvas.width-pad.size-32;
-        pad.y=this.sys.canvas.height-pad.size-32;
+        //pad.x=this.sys.canvas.width-pad.size-32;
+        pad.x = 32;
+        pad.y = this.sys.canvas.height - pad.size - 32;
 
+        let padTir = new Spells(this, 0, 0);
+        padTir.x=this.sys.canvas.width-pad.size-32;
+        
+        padTir.y = this.sys.canvas.height - pad.size - 32;
 
 
         let btFs=this.add.image(0,0,'ui/full-screen-icon');

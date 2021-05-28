@@ -19,7 +19,7 @@ class Tableau extends Phaser.Scene {
         this.load.image('spike', 'assets/spike.png');
         this.load.image('boom', 'assets/kaboom.png');
         this.load.image('boomE', 'assets/kaboomE.png');
-        this.load.audio('zik', 'assets/NeoF.wav');
+        
         this.load.audio('ded', 'assets/clunk.wav');
         this.load.audio('kill', 'assets/flesh.wav');
         this.load.audio('pick', 'assets/coin.wav');
@@ -50,9 +50,7 @@ class Tableau extends Phaser.Scene {
         this.sound.add('ded');
         this.sound.add('kill');
         this.sound.add('pick');
-        this.mood = this.sound.add('zik');
-        this.mood.loop = true;
-        this.mood.play();
+        
 
         console.log("On est sur " + this.constructor.name + " / " + this.scene.key);
         /**
@@ -74,6 +72,12 @@ class Tableau extends Phaser.Scene {
         this.boom.displayHeight = 64;
         this.boom.visible = false;
         this.boom.setDepth(1000);
+
+        this.boomE = this.add.sprite(this.sys.canvas.width / 2, this.sys.canvas.height / 2, "boomE")
+        this.boomE.displayWidth = 64;
+        this.boomE.displayHeight = 64;
+        this.boomE.visible = false;
+        this.boomE.setDepth(1000);
 
 
         this.boutonTir = this.input.keyboard.addKey('A');
@@ -125,6 +129,29 @@ class Tableau extends Phaser.Scene {
             },
             onComplete: function () {
                 me.boom.visible=false;
+                onComplete();
+            }
+        })
+    }
+    saigneE(object, onComplete) {
+        let me = this;
+        me.boomE.visible = true;
+        me.boomE.rotation = Phaser.Math.Between(0, 6);
+        me.boomE.x = object.x;
+        me.boomE.y = object.y;
+        me.tweens.add({
+            targets: me.boomE,
+            duration: 200,
+            displayHeight: {
+                from: 40,
+                to: 70,
+            },
+            displayWidth: {
+                from: 40,
+                to: 70,
+            },
+            onComplete: function () {
+                me.boomE.visible = false;
                 onComplete();
             }
         })
@@ -190,7 +217,7 @@ class Tableau extends Phaser.Scene {
                 this.sound.play('kill');
                 monster.isDead=true; //ok le monstre est mort
                 monster.visible=false;
-                this.saigne(monster,function(){
+                this.saigneE(monster,function(){
                     //à la fin de la petite anim...ben il se passe rien :)
                 })
                 //notre joueur rebondit sur le monstre

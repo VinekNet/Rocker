@@ -11,8 +11,9 @@ class GamePad extends Phaser.GameObjects.Container{
         let dragW=this.size/2;
         let pad2=scene.add.container();
 
-        let circle=scene.add.circle(0,0,this.size/2,0xffffff,0.1)
-        let circleDrag=scene.add.circle(0,0,dragW/2,0xffffff,0.3)
+        let circle = scene.add.circle(0, 0, this.size / 2, 0x1854A2,0.5)
+        let circleDrag = scene.add.circle(0, 0, dragW / 2, 0x12F1BB, 0.7)
+
         this.add(pad2);
         pad2.add(circle);
         pad2.add(circleDrag);

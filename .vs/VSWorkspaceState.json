@@ -3,9 +3,10 @@
     "",
     "\\src",
     "\\src\\objects",
+    "\\src\\objects\\ui",
     "\\src\\scenes",
     "\\src\\scenes\\structure"
   ],
-  "SelectedNode": "\\src\\objects\\LIM.js",
+  "SelectedNode": "\\src\\scenes\\Niveau1.js",
   "PreviewInSolutionExplorer": false
 }

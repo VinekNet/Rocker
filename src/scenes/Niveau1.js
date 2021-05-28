@@ -20,11 +20,24 @@ class Niveau1 extends Tableau{
         this.load.image('lim', 'assets/lim.png');
         this.load.image('ramp', 'assets/rampe.png');
 
+        this.load.audio('zik2', 'assets/NeoF.wav');
+
+       this.load.audio('zik1', 'assets/Beach2.wav');
+
+
     }
     create() {
         super.create();
 
+        this.mood = this.sound.add('zik1');
+        this.mood2 = this.sound.add('zik2');
         
+        this.mood.loop = true;
+        this.mood.play();
+        this.mood2.loop = true;
+        this.mood2.play();
+        
+
         //on définit la taille du tableau
         let largeurDuTableau=896*8  ;
         let hauteurDuTableau=448+152; 
@@ -50,15 +63,16 @@ class Niveau1 extends Tableau{
         
         
         this.platforms = this.physics.add.group();
-        this.platforms.create(400, height-200, 'platforms');
-        this.platforms.create(550, height, 'platforms');
-        this.platforms.create(650, height-100, 'platforms');
-            this.platforms.create(850, height, 'platforms');
-            this.platforms.create(1200, height-30, 'platforms');
-            this.platforms.create(1300, 150, 'platforms');
-            this.platforms.create(1420 , 280, 'platforms');
-            this.platforms.create(1700 , 280, 'platforms');
-            this.platforms.create(1900 , height-200, 'platforms');
+       
+        this.platforms.create(550, height, 'platforms'); //1
+        this.platforms.create(650, height - 100, 'platforms');//2
+        this.platforms.create(850, height, 'platforms');//3
+        this.platforms.create(1100, height - 50, 'platforms');//4
+        this.platforms.create(1200, 170, 'platforms');//5
+        this.platforms.create(1320, 300, 'platforms');//6
+        this.platforms.create(1600, 280, 'platforms');//7
+        //this.platforms.create(1900, height - 200, 'platforms');//7.5
+
             
 
             this.platforms.children.iterate(function (child) {
@@ -75,11 +89,11 @@ class Niveau1 extends Tableau{
             
             this.physics.add.collider(this.player,this.platforms);
             this.stars=this.physics.add.group();
-            this.stars.create(400,100,"star");
+            /*this.stars.create(400,100,"star");
             this.stars.create(860,255,"star");
             this.stars.create(1320,105,"star");
             this.stars.create(1900,0,"star");
-           
+           */
             this.stars.children.iterate(function (child) {
                 child.setCollideWorldBounds(true);
                 child.setBounce(0);
@@ -94,10 +108,10 @@ class Niveau1 extends Tableau{
         //6: se retourne avant le mur
         this.monsters = new Array();
         this.monster = new LIM(this, 700, height + 60);
-        this.monster1 = new MonsterTest(this,1100,height+60);
-        this.monster2 = new MonsterTest(this,1600,height+60);
-        this.monster3 = new Twomp(this,450,300);
-        this.monster4 = new Twomp(this, 1250, 300);
+        this.monster1 = new LIM(this,1100,height+60);
+        this.monster2 = new LIM(this,1600,height+60);
+        //this.monster3 = new Twomp(this,450,300);
+        //this.monster4 = new Twomp(this, 1250, 300);
 
         this.monsters.push(this.monster);
         this.monsters.push(this.monster1);
@@ -166,7 +180,14 @@ class Niveau1 extends Tableau{
         this.sky3.tilePositionY=this.cameras.main.scrollY*0.2-35;
         //le deuxième ciel se déplace moins vite pour accentuer l'effet
         this.sky2.tilePositionX=this.cameras.main.scrollX*0.3+500;
-        this.sky2.tilePositionY=this.cameras.main.scrollY*0.1;
+        this.sky2.tilePositionY = this.cameras.main.scrollY * 0.1;
+
+        //his.mood.volume = 0
+        //this.mood2.volume =0
+        this.mood.volume = 1 - (this.player.x / (896*8));
+        console.log(this.mood.volume);
+        this.mood2.volume = (this.player.x / (896 * 8));
+        console.log(this.mood2.volume);
     }
 
 
