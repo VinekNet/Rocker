@@ -15,9 +15,10 @@ class Tableau extends Phaser.Scene {
      * Par défaut on charge un fond et le player
      */
     preload() {
-        this.load.image('sky', 'assets/fond.png');
+        this.load.image('sky', 'assets/0.png');
         this.load.image('spike', 'assets/spike.png');
         this.load.image('boom', 'assets/kaboom.png');
+        this.load.image('boomE', 'assets/kaboomE.png');
         this.load.audio('zik', 'assets/NeoF.wav');
         this.load.audio('ded', 'assets/clunk.wav');
         this.load.audio('kill', 'assets/flesh.wav');
@@ -58,9 +59,10 @@ class Tableau extends Phaser.Scene {
          * Le ciel en fond
          * @type {Phaser.GameObjects.Image}
          */
-        this.sky = this.add.image(0, 0, 'sky').setOrigin(0, 0);
-        this.sky.displayWidth = 14 * 64;
-        this.sky.setScrollFactor(0, 0);
+        this.sky = this.add.image(0, 448, 'sky').setOrigin(0, 1);
+        this.sky.displayWidth = 14 * 64 * 8
+            ;
+        this.sky.setScrollFactor(1, 0);
         /**
          * Le joueur
          * @type {Player}

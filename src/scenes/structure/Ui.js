@@ -6,6 +6,7 @@
     }
     preload(){
         this.load.image('ui/full-screen-icon', 'assets/ui/full-screen.png');
+        this.load.image('energyBack', 'assets/ui/stormBack.png');
         this.load.image('energyContainer', 'assets/ui/stormEmpty.png');
         this.load.image('energyFilled', 'assets/ui/stormFull.png');
     }
@@ -88,7 +89,8 @@
         btFs.setDisplaySize(48,48)
         btFs.x=this.sys.canvas.width;
         btFs.y=this.sys.canvas.height;
-
+        this.containerBG = this.physics.add.sprite(75, 125, 'energyBack');
+        this.containerBG.body.enable = false;
         this.energyFill = this.physics.add.sprite(43, 125+60, 'energyFilled');
         this.energyFill.body.enable = false;
         this.energyFill.setOrigin(0, 1);

@@ -1,16 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\vendor",
-    "\\vendor\\phaser-3.50.0",
-    "\\vendor\\phaser-3.50.0\\src",
-    "\\vendor\\phaser-3.50.0\\src\\animations",
-    "\\vendor\\phaser-3.50.0\\src\\input",
-    "\\vendor\\phaser-3.50.0\\src\\input\\keyboard\\keys",
-    "\\vendor\\phaser-3.50.0\\src\\physics",
-    "\\vendor\\phaser-3.50.0\\src\\physics\\arcade",
-    "\\vendor\\phaser-3.50.0\\src\\physics\\arcade\\components"
+    "\\src",
+    "\\src\\objects",
+    "\\src\\scenes",
+    "\\src\\scenes\\structure"
   ],
-  "SelectedNode": "\\vendor\\phaser-3.50.0\\src\\input\\index.js",
+  "SelectedNode": "\\src\\objects\\LIM.js",
   "PreviewInSolutionExplorer": false
 }

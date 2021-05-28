@@ -15,7 +15,7 @@ let config = {
     },
     scene: [
         new Ui(),
-        new TableauLevel("Niveau Scroll Test"),
+        new Niveau1("Neo-Frankfurt"),
         //new TableauTiledFou("LvlTiled WIP"),
         //new TableauBoss("Boss"),
 
