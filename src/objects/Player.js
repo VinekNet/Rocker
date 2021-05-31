@@ -198,8 +198,10 @@ class Player extends Phaser.Physics.Arcade.Sprite{
     ramp() {
         if (this.energy >= 25 && this.body.blocked.down) {
 
-            this.rampActiv = new Ramp(this.scene, this.x + 126 * this.sens, this.y + 25);
-            this.rampActiv.anims.play('left');
+                this.rampActiv = new Ramp(this.scene, this.x + 126*this.sens, this.y + 25);
+
+            
+            
             console.log("Rampe");
             this.energy -= 25;
         }
@@ -207,7 +209,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
 
     boostRamp() {
         this.body.setVelocityX(2000*this.sens);
-        this.body.setVelocityY(-500);
+        this.body.setVelocityY(-700);
         console.log(this.body.velocity);
         let here = this;
         setTimeout(function () {
