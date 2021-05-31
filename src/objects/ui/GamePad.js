@@ -20,6 +20,9 @@ class GamePad extends Phaser.GameObjects.Container{
         pad2.x=w/2;
         pad2.y=w/2;
 
+        let droite = false;
+        let gauche = false;
+
         circleDrag.setInteractive();
         scene.input.setDraggable(circleDrag, true);
 
@@ -47,6 +50,7 @@ class GamePad extends Phaser.GameObjects.Container{
         scene.input.keyboard.on('keyup', function(kevent){
             switch (kevent.key){
                 case "ArrowRight":
+
                     Tableau.current.player.directionX=0;
                     break;
 

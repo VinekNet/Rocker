@@ -5,11 +5,8 @@
     "\\src\\objects",
     "\\src\\objects\\ui",
     "\\src\\scenes",
-    "\\src\\scenes\\structure",
-    "\\vendor\\phaser-3.50.0",
-    "\\vendor\\phaser-3.50.0\\src",
-    "\\vendor\\phaser-3.50.0\\src\\scene"
+    "\\src\\scenes\\structure"
   ],
-  "SelectedNode": "\\src\\objects\\Ramp.js",
+  "SelectedNode": "\\src\\scenes\\structure\\Tableau.js",
   "PreviewInSolutionExplorer": false
 }
