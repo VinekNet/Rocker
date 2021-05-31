@@ -82,93 +82,94 @@ class Player extends Phaser.Physics.Arcade.Sprite{
      * Déplace le joueur en fonction des directions données
      */
     move() {
-        /*scene.input.keyboard.on('keydown', function (kevent) {
-            switch (kevent.key) {
-                case "ArrowRight":
-                    Tableau.current.player.directionX = 1;
-                    break;
-
-                case "ArrowLeft":
-                    Tableau.current.player.directionX = -1;
-                    break;
-
-                case "ArrowUp":
-                    Tableau.current.player.directionY = -1;
-                    break;
-
-                case "ArrowDown":
-                    Tableau.current.player.directionY = 1;
-                    break;
+        if (this.ramped == false) {
+            /*scene.input.keyboard.on('keydown', function (kevent) {
+                switch (kevent.key) {
+                    case "ArrowRight":
+                        Tableau.current.player.directionX = 1;
+                        break;
+    
+                    case "ArrowLeft":
+                        Tableau.current.player.directionX = -1;
+                        break;
+    
+                    case "ArrowUp":
+                        Tableau.current.player.directionY = -1;
+                        break;
+    
+                    case "ArrowDown":
+                        Tableau.current.player.directionY = 1;
+                        break;
+                }
+            });
+            scene.input.keyboard.on('keyup', function (kevent) {
+                switch (kevent.key) {
+                    case "ArrowRight":
+                        Tableau.current.player.directionX = 0;
+                        break;
+    
+                    case "ArrowLeft":
+                        Tableau.current.player.directionX = 0;
+                        break;
+    
+                    case "ArrowUp":
+                        Tableau.current.player.directionY = 0;
+                        break;
+    
+                    case "ArrowDown":
+                        Tableau.current.player.directionY = 0;
+                        break;
+                }
+            });*/
+            if (this._directionX < 0) {
+                this.sens = -1;
+                this.setVelocityX(-200);
+                this.anims.play('left', true);
             }
-        });
-        scene.input.keyboard.on('keyup', function (kevent) {
-            switch (kevent.key) {
-                case "ArrowRight":
-                    Tableau.current.player.directionX = 0;
-                    break;
-
-                case "ArrowLeft":
-                    Tableau.current.player.directionX = 0;
-                    break;
-
-                case "ArrowUp":
-                    Tableau.current.player.directionY = 0;
-                    break;
-
-                case "ArrowDown":
-                    Tableau.current.player.directionY = 0;
-                    break;
+            else if (this._directionX > 0) {
+                this.sens = 1;
+                this.setVelocityX(200);
+                this.anims.play('right', true);
             }
-        });*/
-        if (this._directionX < 0) {
-            this.sens = -1;
-            this.setVelocityX(-200);
-            this.anims.play('left', true);
-        }
-        else if (this._directionX > 0) {
-            this.sens = 1;
-            this.setVelocityX(200);
-            this.anims.play('right', true);
-        }
 
-        else {
-            if (this.ramped == false) {
-                this.setVelocityX(0);
-                this.anims.play('stance', true);
-                this.anims.play(this.sens === -1 ? 'back' : 'stance', true);
+            else {
+                if (this.ramped == false) {
+                    this.setVelocityX(0);
+                    this.anims.play('stance', true);
+                    this.anims.play(this.sens === -1 ? 'back' : 'stance', true);
+                }
             }
-        }
 
 
 
 
-        if (this._directionY < 0) {
-            if (this.body.blocked.down && this.ramped == false) {
-                this.setVelocityY(-550);
+            if (this._directionY < 0) {
+                if (this.body.blocked.down && this.ramped == false) {
+                    this.setVelocityY(-550);
 
+                }
+                else {
+                    if (this.sens == -1) {
+                        this.anims.play('jumpback', true);
+                    }
+                    else { this.anims.play('jump', true); }
+                }
             }
             else {
-                if (this.sens == -1) {
-                    this.anims.play('jumpback', true);
-                }
-                else { this.anims.play('jump', true); }
-            }
-        }
-        else {
-            if (this.body.blocked.down) {
+                if (this.body.blocked.down) {
 
-            }
-            else {
-                if (this.sens == -1) {
-                    this.anims.play('jumpback', true);
                 }
-                else { this.anims.play('jump', true); }
+                else {
+                    if (this.sens == -1) {
+                        this.anims.play('jumpback', true);
+                    }
+                    else { this.anims.play('jump', true); }
+                }
             }
         }
+
     }
     
-
-
 
     
 
@@ -195,15 +196,17 @@ class Player extends Phaser.Physics.Arcade.Sprite{
     }
 
     ramp() {
-        if (this.energy >= 25) {
+        if (this.energy >= 25 && this.body.blocked.down) {
+
             this.rampActiv = new Ramp(this.scene, this.x + 126 * this.sens, this.y + 25);
+            this.rampActiv.anims.play('left');
             console.log("Rampe");
             this.energy -= 25;
         }
     }
 
     boostRamp() {
-        this.body.setVelocityX(200000);
+        this.body.setVelocityX(2000*this.sens);
         this.body.setVelocityY(-500);
         console.log(this.body.velocity);
         let here = this;

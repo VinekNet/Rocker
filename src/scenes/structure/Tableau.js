@@ -6,6 +6,7 @@ class Tableau extends Phaser.Scene {
     /**
      *
      * @param {String} key identifiant de la scène à jouer
+     * 
      */
     constructor(key) {
         super(key);
@@ -19,7 +20,21 @@ class Tableau extends Phaser.Scene {
         this.load.image('spike', 'assets/spike.png');
         this.load.image('boom', 'assets/kaboom.png');
         this.load.image('boomE', 'assets/kaboomE.png');
-        
+
+        this.load.spritesheet('tir',
+            'assets/concombre.png',
+            { frameWidth: 16, frameHeight: 8 }
+        );
+
+        this.load.spritesheet('rampe',
+            'assets/Rampe.png',
+            { frameWidth: 128, frameHeight: 64 }
+        );
+        this.load.spritesheet('rampeB',
+            'assets/RampeB.png',
+            { frameWidth: 128, frameHeight: 64}
+        );
+
         this.load.audio('ded', 'assets/clunk.wav');
         this.load.audio('kill', 'assets/flesh.wav');
         this.load.audio('pick', 'assets/coin.wav');
@@ -50,7 +65,6 @@ class Tableau extends Phaser.Scene {
         this.sound.add('ded');
         this.sound.add('kill');
         this.sound.add('pick');
-        
 
         console.log("On est sur " + this.constructor.name + " / " + this.scene.key);
         /**
@@ -84,12 +98,26 @@ class Tableau extends Phaser.Scene {
         this.boutonShield = this.input.keyboard.addKey('Z');
         this.boutonRamp = this.input.keyboard.addKey('E');
         ui.updateEnergy();
+
+      
     }
-    update() {
+    update(time, delta) {
+        
         super.update();
         this.player.move();
         this.capacityPlayer();
+        ///limiteEnergy
+        if (this.player.energy > 49) {
+            this.player.energy = 49;
+        }
+        ///////////////
+
+       
+
+        this.capacityPlayer();
+
     }
+
 
     capacityPlayer() {
         if (Phaser.Input.Keyboard.JustDown(this.boutonTir)) {

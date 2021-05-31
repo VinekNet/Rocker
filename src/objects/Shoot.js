@@ -16,6 +16,15 @@ class Shoot extends ObjetPhysique {
         //})
         let ici = scene;
         let tir = this;
+
+        this.key = 'default';
+        this.anims.create({
+            key: 'default',
+            frames: this.anims.generateFrameNumbers('tir', { start: 0, end: 2 }),
+            frameRate: 24,
+            repeat: -1
+        });
+        this.anims.play('default');
         scene.monsters.forEach(function (enfant, index) {
             ici.physics.add.overlap(tir, enfant, function () {
                 enfant.Tmortlol()

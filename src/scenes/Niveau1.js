@@ -15,11 +15,10 @@ class Niveau1 extends Tableau{
         this.load.image('platforms', 'assets/plateforme1.png');
         this.load.image('monster-pattern', 'assets/' + randImage + '.png');
         this.load.image('twomp', 'assets/twompmonstre.png');
-        this.load.image('tir', 'assets/concombre.png');
+        
         this.load.image('shield', 'assets/shield.png');
         this.load.image('lim', 'assets/lim.png');
-        this.load.image('ramp', 'assets/rampe.png');
-
+       
         this.load.audio('zik2', 'assets/NeoF.wav');
 
        this.load.audio('zik1', 'assets/Beach2.wav');
@@ -169,10 +168,28 @@ class Niveau1 extends Tableau{
         
         this.stars.setDepth(10)
         this.player.setDepth(10)
+
+        this.i = 0;
     }
 
-    update(){
+    update(time,delta){
         super.update();
+
+        this.i += delta;
+        //console.log(this.i);
+
+        if (this.i >= 700) {
+            //console.log("+");
+            if (this.player.energy <= 49) {
+                this.player.energy += 1;
+                ui.updateEnergy();
+            }
+            this.i = 0;
+            ui.updateEnergy();
+        }
+
+
+
         this.sky4.tilePositionX = this.cameras.main.scrollX * 0.6;
             
         //le ciel se déplace moins vite que la caméra pour donner un effet paralax
@@ -185,9 +202,9 @@ class Niveau1 extends Tableau{
         //his.mood.volume = 0
         //this.mood2.volume =0
         this.mood.volume = 1 - (this.player.x / (896*8));
-        console.log(this.mood.volume);
+        //console.log(this.mood.volume);
         this.mood2.volume = (this.player.x / (896 * 8));
-        console.log(this.mood2.volume);
+        //console.log(this.mood2.volume);
     }
 
 

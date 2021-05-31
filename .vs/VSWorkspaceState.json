@@ -5,8 +5,11 @@
     "\\src\\objects",
     "\\src\\objects\\ui",
     "\\src\\scenes",
-    "\\src\\scenes\\structure"
+    "\\src\\scenes\\structure",
+    "\\vendor\\phaser-3.50.0",
+    "\\vendor\\phaser-3.50.0\\src",
+    "\\vendor\\phaser-3.50.0\\src\\scene"
   ],
-  "SelectedNode": "\\src\\scenes\\Niveau1.js",
+  "SelectedNode": "\\src\\objects\\Ramp.js",
   "PreviewInSolutionExplorer": false
 }
