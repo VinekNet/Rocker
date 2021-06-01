@@ -19,10 +19,10 @@
          * @type {Phaser.GameObjects.Text}
          * @private
          */
-        this._scoreText = this.add.text(16, 16, '...', {
-            font:'32px "Hanalei Fill"',
-            fill: '#fff'
-        });
+        //this._scoreText = this.add.text(16, 16, '...', {
+        //    font:'32px "Hanalei Fill"',
+        //    fill: '#fff'
+        //});
 
         /**
          * Le champ texte avec la clé du tableau
@@ -93,19 +93,19 @@
         btFs.setDisplaySize(48,48)
         btFs.x=this.sys.canvas.width;
         btFs.y=this.sys.canvas.height;
-        this.containerBG = this.physics.add.sprite(75, 125, 'energyBack');
+        this.containerBG = this.physics.add.sprite(75, 90, 'energyBack');
         this.containerBG.body.enable = false;
-        this.energyFill = this.physics.add.sprite(43, 125+60, 'energyFilled');
+        this.energyFill = this.physics.add.sprite(43, 90+60, 'energyFilled');
         this.energyFill.body.enable = false;
         this.energyFill.setOrigin(0, 1);
-        this.containerEnergy = this.physics.add.sprite(75, 125, 'energyContainer');
+        this.containerEnergy = this.physics.add.sprite(75, 90, 'energyContainer');
         this.containerEnergy.body.enable = false;
     }
 
     gagne(points=10)
     {
         this.score+=points;
-        this._scoreText.setText('Score: ' + this.score);
+        //this._scoreText.setText('Score: ' + this.score);
        }
 
        updateEnergy() {

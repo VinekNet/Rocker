@@ -32,8 +32,11 @@ class Tableau extends Phaser.Scene {
         );
 
         this.load.audio('ded', 'assets/clunk.wav');
-        this.load.audio('kill', 'assets/flesh.wav');
+        this.load.audio('jump', 'assets/jump+.wav');
+        this.load.audio('kill', 'assets/KILLED.wav');
         this.load.audio('pick', 'assets/coin.wav');
+        this.load.audio('shootin', 'assets/Shooshoot.wav');
+
         this.load.spritesheet('player',
             'assets/player.png',
             { frameWidth: 40, frameHeight: 64 }
@@ -75,7 +78,7 @@ class Tableau extends Phaser.Scene {
          * Le joueur
          * @type {Player}
          */
-        this.player = new Player(this, 128, 0);
+        this.player = new Player(this, 128, 485); //300 ou 
 
         this.boom = this.add.sprite(this.sys.canvas.width / 2, this.sys.canvas.height / 2, "boom")
         this.boom.displayWidth = 64;
@@ -252,14 +255,17 @@ class Tableau extends Phaser.Scene {
                     me.player.isDead=true;
                     me.player.visible=false;
                     this.mood.stop();
+                    this.mood2.stop();
                     this.sound.play('ded');
                     //ça saigne...
                     me.saigne(me.player,function(){
                         //à la fin de la petite anim, on relance le jeu
                         me.boom.visible=false;
                         me.player.anims.play('turn');
-                        me.player.isDead=false;
+                        me.player.isDead = false;
+                       
                         me.scene.restart();
+
                     })
 
                 }

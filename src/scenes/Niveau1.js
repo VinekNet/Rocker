@@ -7,7 +7,7 @@ class Niveau1 extends Tableau{
          
         this.load.image('star', 'assets/bolt.png');
         this.load.image('ground', 'assets/sol.png');
-        this.load.image('sky-2', 'assets/1.png');
+        this.load.image('sky-2', 'assets/test.png');
         this.load.image('sky-3', 'assets/2.png');
         this.load.image('sky-4', 'assets/3.png');
         this.load.image('sky-5', 'assets/4.png');
@@ -18,10 +18,10 @@ class Niveau1 extends Tableau{
         
         this.load.image('shield', 'assets/shield.png');
         this.load.image('lim', 'assets/lim.png');
-       
+        this.load.image('lxm', 'assets/lxm.png');
         this.load.audio('zik2', 'assets/NeoF.wav');
 
-       this.load.audio('zik1', 'assets/Beach2.wav');
+       this.load.audio('zik1', 'assets/Beach3.wav');
 
 
     }
@@ -30,7 +30,9 @@ class Niveau1 extends Tableau{
 
         this.mood = this.sound.add('zik1');
         this.mood2 = this.sound.add('zik2');
-        
+        this.mood.volume = 0;
+        this.mood2.volume = 0;
+
         this.mood.loop = true;
         this.mood.play();
         this.mood2.loop = true;
@@ -66,8 +68,8 @@ class Niveau1 extends Tableau{
         this.platforms.create(550, height, 'platforms'); //1
         this.platforms.create(650, height - 100, 'platforms');//2
         this.platforms.create(850, height, 'platforms');//3
-        this.platforms.create(1100, height - 50, 'platforms');//4
-        this.platforms.create(1200, 170, 'platforms');//5
+        this.platforms.create(1100, height - 25, 'platforms');//4
+        this.platforms.create(1100, 180, 'platforms');//5
         this.platforms.create(1320, 300, 'platforms');//6
         this.platforms.create(1600, 280, 'platforms');//7
         //this.platforms.create(1900, height - 200, 'platforms');//7.5
@@ -106,7 +108,7 @@ class Niveau1 extends Tableau{
             this.physics.add.overlap(this.player, this.stars, this.ramasserEtoile, null, this);
         //6: se retourne avant le mur
         this.monsters = new Array();
-        this.monster = new LIM(this, 700, height + 60);
+        this.monster = new LXM(this, 700, height + 60);
         this.monster1 = new LIM(this,1100,height+60);
         this.monster2 = new LIM(this,1600,height+60);
         //this.monster3 = new Twomp(this,450,300);
@@ -146,6 +148,9 @@ class Niveau1 extends Tableau{
             this.sys.canvas.height,
             'sky-2'
         );*/
+        this.sun = this.add.image(600, 132, 'sun').setOrigin(0, 1);
+        this.sun.setScrollFactor(0, 0);
+        /////   
         this.sky2 = this.add.image(0, 448, 'sky-2').setOrigin(0, 1);
         this.sky2.setScrollFactor(1,0);
         
@@ -158,7 +163,7 @@ class Niveau1 extends Tableau{
         /////                           4
         this.sky5 = this.add.image(0, 448, 'sky-5').setOrigin(0, 1);
         this.sky5.setScrollFactor(1, 0);
-        
+        /////
         
         //this.sky.tileScaleX=this.sky.tileScaleY=0.8;
         
@@ -170,13 +175,16 @@ class Niveau1 extends Tableau{
         this.player.setDepth(10)
 
         this.i = 0;
+        this.j = 0;
+        this.dirUp = false;
     }
 
     update(time,delta){
         super.update();
 
         this.i += delta;
-        //console.log(this.i);
+        this.j += delta;
+        //console.log(this.dirUp);
 
         if (this.i >= 700) {
             //console.log("+");
@@ -185,8 +193,30 @@ class Niveau1 extends Tableau{
                 ui.updateEnergy();
             }
             this.i = 0;
-            ui.updateEnergy();
         }
+        ui.updateEnergy();
+        if (this.dirUp == false) {
+            if (this.j >= 1300) {
+                this.platforms.children.iterate(function (child) {
+                    child.y += 1;
+
+                })
+                this.j = 0;
+                this.dirUp = true;
+            }
+        }
+            if (this.dirUp == true) {
+                if (this.j >= 1300) {
+                    this.platforms.children.iterate(function (child) {
+                        child.y -= 1;
+                        
+                    })
+                    this.j = 0;
+                    this.dirUp = false;
+                }
+            }   
+            
+        
 
 
 
@@ -201,10 +231,16 @@ class Niveau1 extends Tableau{
 
         //his.mood.volume = 0
         //this.mood2.volume =0
-        this.mood.volume = 1 - (this.player.x / (896*8));
+        if (this.player.x >= 2500) {
+            this.mood.volume = 0
+        }
+        else { this.mood.volume = (1 - (this.player.x / (896 * 3))) / 3; }
         //console.log(this.mood.volume);
-        this.mood2.volume = (this.player.x / (896 * 8));
+        //this.mood2.volume = ((this.player.x / (896 * 8)))/3;
+        this.mood2.volume = ((this.player.x / (896 * 3))) / 3;
         //console.log(this.mood2.volume);
+
+        //console.log(this.player.x);
     }
 
 

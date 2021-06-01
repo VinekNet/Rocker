@@ -29,6 +29,7 @@ class Shoot extends ObjetPhysique {
             ici.physics.add.overlap(tir, enfant, function () {
                 enfant.Tmortlol()
                 tir.destroy();
+                scene.sound.play('kill');
                 scene.saigneE(enfant, function () {
                     //à la fin de la petite anim...ben il se passe rien :)
                 })

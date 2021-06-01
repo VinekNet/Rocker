@@ -11,6 +11,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         this.setBodySize(this.body.width,this.body.height);
         this.setOffset(0, 0);
         this.sens = 1;
+        this.jumped = false;
         this.ramped = false;
         this.rampActiv;
         this.key = 'default';
@@ -144,11 +145,18 @@ class Player extends Phaser.Physics.Arcade.Sprite{
 
 
             if (this._directionY < 0) {
+                if (this.jumped == false) {
+                    this.scene.sound.play('jump');
+                    this.jumped = true;
+
+                }
                 if (this.body.blocked.down && this.ramped == false) {
                     this.setVelocityY(-550);
+                    this.jumped = false;
 
                 }
                 else {
+                   
                     if (this.sens == -1) {
                         this.anims.play('jumpback', true);
                     }
@@ -157,9 +165,10 @@ class Player extends Phaser.Physics.Arcade.Sprite{
             }
             else {
                 if (this.body.blocked.down) {
-
+                    this.jumped = false;
                 }
                 else {
+                    
                     if (this.sens == -1) {
                         this.anims.play('jumpback', true);
                     }
@@ -175,6 +184,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
 
     shoot() {
         if (this.energy >= 5) {
+            this.scene.sound.play('shootin');
             var bullet = new Shoot(this.scene, this.x + 20 * this.sens, this.y - 10);
             console.log("Tir");
             setTimeout(function () {
@@ -208,8 +218,13 @@ class Player extends Phaser.Physics.Arcade.Sprite{
     }
 
     boostRamp() {
+        this.scene.sound.play('jump');
         this.body.setVelocityX(1000*this.sens);
         this.body.setVelocityY(-700);
+        if (this.sens == -1) {
+            this.anims.play('jumpback', true);
+        }
+        else { this.anims.play('jump', true); }
         console.log(this.body.velocity);
         let here = this;
         setTimeout(function () {
