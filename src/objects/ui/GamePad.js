@@ -5,6 +5,7 @@ class GamePad extends Phaser.GameObjects.Container{
     constructor(scene, x, y, size = 100) {
         super(scene, x, y)
         scene.add.existing(this);
+
         if (scene.sys.game.device.os.desktop !== true) {/////////////////////
             this.size = size;
             let w = this.size;
@@ -25,6 +26,35 @@ class GamePad extends Phaser.GameObjects.Container{
 
             circleDrag.setInteractive();
             scene.input.setDraggable(circleDrag, true);
+            circleDrag.on('drag', (pointer, dragX, dragY) => {
+                circleDrag.x = dragX
+                circleDrag.y = dragY
+                circleDrag.x = Phaser.Math.Clamp(dragX, -w / 2, w / 2);
+                circleDrag.y = Phaser.Math.Clamp(dragY, -w / 2, w / 2);
+                if (dragX < -w / 4) {
+                    Tableau.current.player.directionX = -1;
+                } else if (dragX > w / 4) {
+                    Tableau.current.player.directionX = 1;
+                } else {
+                    Tableau.current.player.directionX = 0;
+                }
+                if (dragY < -w / 4) {
+                    Tableau.current.player.directionY = -1;
+                } else if (dragY > w / 4) {
+                    Tableau.current.player.directionY = 1;
+                } else {
+                    Tableau.current.player.directionY = 0;
+                }
+
+            });
+            circleDrag.on('dragend', (pointer, dragX, dragY) => {
+                circleDrag.x = 0;
+                circleDrag.y = 0;
+                Tableau.current.player.directionX = 0;
+                Tableau.current.player.directionY = 0;
+            });
+
+        
         }////////////////////////////////////////////////////////////////////////////////////
         this.cursors = scene.input.keyboard.createCursorKeys();
 
@@ -67,36 +97,7 @@ class GamePad extends Phaser.GameObjects.Container{
                     break;
             }
         });
-        if (scene.sys.game.device.os.desktop !== true) {//////////////////////////////////////////
-            circleDrag.on('drag', (pointer, dragX, dragY) => {
-                circleDrag.x = dragX
-                circleDrag.y = dragY
-                circleDrag.x = Phaser.Math.Clamp(dragX, -w / 2, w / 2);
-                circleDrag.y = Phaser.Math.Clamp(dragY, -w / 2, w / 2);
-                if (dragX < -w / 4) {
-                    Tableau.current.player.directionX = -1;
-                } else if (dragX > w / 4) {
-                    Tableau.current.player.directionX = 1;
-                } else {
-                    Tableau.current.player.directionX = 0;
-                }
-                if (dragY < -w / 4) {
-                    Tableau.current.player.directionY = -1;
-                } else if (dragY > w / 4) {
-                    Tableau.current.player.directionY = 1;
-                } else {
-                    Tableau.current.player.directionY = 0;
-                }
 
-            });
-            circleDrag.on('dragend', (pointer, dragX, dragY) => {
-                circleDrag.x = 0;
-                circleDrag.y = 0;
-                Tableau.current.player.directionX = 0;
-                Tableau.current.player.directionY = 0;
-            });
-
-        }////////////////////////////////////////////////////////////////////////////////////
     }
 
 

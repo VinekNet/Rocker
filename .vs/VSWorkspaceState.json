@@ -12,6 +12,6 @@
     "\\vendor\\phaser-3.50.0\\scripts\\tsgen",
     "\\vendor\\phaser-3.50.0\\scripts\\tsgen\\src"
   ],
-  "SelectedNode": "\\src\\scenes\\Niveau1.js",
+  "SelectedNode": "\\src\\objects\\ui\\GamePad.js",
   "PreviewInSolutionExplorer": false
 }
