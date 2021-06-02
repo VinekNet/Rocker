@@ -37,13 +37,13 @@ class Tableau extends Phaser.Scene {
         );
 
         this.load.spritesheet('Rampe',
-            'assets/Rampe.png',
+            'assets/rampe.png',
             { frameWidth: 128, frameHeight: 64 }
         );
 
         this.load.audio('ded', 'assets/clunk.wav');
         this.load.audio('jump', 'assets/jump+.wav');
-        this.load.audio('kill', 'assets/KILLED.wav');
+        this.load.audio('kill', 'assets/killed.wav');
         this.load.audio('pick', 'assets/coin.wav');
         this.load.audio('shootin', 'assets/Shooshoot.wav');
 

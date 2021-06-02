@@ -25,7 +25,7 @@ class Niveau1 extends Tableau{
 
         this.load.audio('zik2', 'assets/NeoF.wav');
 
-       this.load.audio('zik1', 'assets/Beach3.wav');
+       this.load.audio('zik1', 'assets/beach3.wav');
 
 
     }
