@@ -10,7 +10,7 @@ class MonsterFly extends ObjetEnnemi {
         //pas de gravité
         this.body.allowGravity = false;
 
-        //gestion de la taille
+        //gestion de la taille²
         this.setDisplaySize(64, 64);
 
         //on réduit un peu la zone de hit

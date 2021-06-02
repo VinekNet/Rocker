@@ -34,6 +34,16 @@ class LXM extends ObjetEnnemi {
         this.y = this.minY;
         this.alpha = 0;
         let me = this;
+            
+        this.key = 'right';
+
+        this.anims.create({
+            key: 'right',
+            frames: this.anims.generateFrameNumbers('lxm', { start: 0, end: 2 }),
+            frameRate: 10,
+            repeat: -1
+        });
+        this.anims.play('right', true);
 
         //on fait apparaitre notre objet avec un petit delay, puis on lance l'animation
         //ceci a pour effet de décaler les animations pour ce même objet

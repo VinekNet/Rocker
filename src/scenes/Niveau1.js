@@ -7,18 +7,22 @@ class Niveau1 extends Tableau{
          
         this.load.image('star', 'assets/bolt.png');
         this.load.image('ground', 'assets/sol.png');
-        this.load.image('sky-2', 'assets/test.png');
+        this.load.image('sky-2', 'assets/1.png');
         this.load.image('sky-3', 'assets/2.png');
         this.load.image('sky-4', 'assets/3.png');
         this.load.image('sky-5', 'assets/4.png');
+        this.load.image('tas', 'assets/tas.png');
+        this.load.image('tasf', 'assets/tasfond.png');
         this.load.image('sun', 'assets/sun.png');
+        this.load.image('tuto', 'assets/tuto.png');
         this.load.image('platforms', 'assets/plateforme1.png');
+        this.load.image('platformsz', 'assets/plateforme2.png');
         this.load.image('monster-pattern', 'assets/' + randImage + '.png');
         this.load.image('twomp', 'assets/twompmonstre.png');
         
         this.load.image('shield', 'assets/shield.png');
-        this.load.image('lim', 'assets/lim.png');
-        this.load.image('lxm', 'assets/lxm.png');
+        
+
         this.load.audio('zik2', 'assets/NeoF.wav');
 
        this.load.audio('zik1', 'assets/Beach3.wav');
@@ -55,7 +59,7 @@ class Niveau1 extends Tableau{
             ground.setImmovable(true); //ne bouge pas quand on rentre dedans
             this.physics.add.collider(this.player, ground);//le joueur rebondit dessus*/*
             ground.setScrollFactor(1);
-            ground.setDepth(1);
+            ground.setDepth(60);
             ground.tilePositionX=this.cameras.main.scrollX*0.6;
             
         }
@@ -64,7 +68,8 @@ class Niveau1 extends Tableau{
         
         
         this.platforms = this.physics.add.group();
-       
+        this.platformsz = this.physics.add.group();
+
         this.platforms.create(550, height, 'platforms'); //1
         this.platforms.create(650, height - 100, 'platforms');//2
         this.platforms.create(850, height, 'platforms');//3
@@ -72,6 +77,15 @@ class Niveau1 extends Tableau{
         this.platforms.create(1100, 180, 'platforms');//5
         this.platforms.create(1320, 300, 'platforms');//6
         this.platforms.create(1600, 280, 'platforms');//7
+        this.platformsz.create(1805, 500, 'platforms');//8
+        this.platformsz.create(1900, 465, 'platforms');//9
+        this.platformsz.create(1932, 409, 'platforms');//10
+        this.platformsz.create(1955, 366, 'platforms');//11
+        this.platformsz.create(1970, 366, 'platforms');//11.5
+        this.platformsz.create(2116, 320, 'platforms');//12
+        this.platformsz.create(2193, 320, 'platforms');//13
+        this.platformsz.create(2260, 415, 'platforms');//14
+        this.platformsz.create(2395, 506, 'platforms');//15
         //this.platforms.create(1900, height - 200, 'platforms');//7.5
 
             
@@ -86,9 +100,22 @@ class Niveau1 extends Tableau{
                 child.setDepth(10);
                 child.setFriction(1); //les éléments ne glissent pas dessus cette plateforme
             });
+        this.platformsz.children.iterate(function (child) {
+            child.setImmovable(true);
+            child.body.allowGravity = false;
+            child.setVelocityX(0);
+            child.setBounceX(1);
+            child.setDisplaySize(128, 16);
+            child.setCollideWorldBounds(true);
+            child.setDepth(10);
+            child.setFriction(1); //les éléments ne glissent pas dessus cette plateforme
+        });
            
             
-            this.physics.add.collider(this.player,this.platforms);
+
+        this.physics.add.collider(this.player, this.platforms);
+
+        this.physics.add.collider(this.player, this.platformsz);
             this.stars=this.physics.add.group();
             /*this.stars.create(400,100,"star");
             this.stars.create(860,255,"star");
@@ -110,7 +137,7 @@ class Niveau1 extends Tableau{
         this.monsters = new Array();
         this.monster = new LXM(this, 700, height + 60);
         this.monster1 = new LIM(this,1100,height+60);
-        this.monster2 = new LIM(this,1600,height+60);
+        this.monster2 = new LIM(this,1400,height+60);
         //this.monster3 = new Twomp(this,450,300);
         //this.monster4 = new Twomp(this, 1250, 300);
 
@@ -148,11 +175,15 @@ class Niveau1 extends Tableau{
             this.sys.canvas.height,
             'sky-2'
         );*/
+        this.tuto = this.add.image(-120, 370       , 'tuto').setOrigin(0, 1);
+        this.tuto.setScrollFactor(0);
+        this.tuto.setDepth(90);
+        /////
         this.sun = this.add.image(600, 132, 'sun').setOrigin(0, 1);
         this.sun.setScrollFactor(0, 0);
         /////   
         this.sky2 = this.add.image(0, 448, 'sky-2').setOrigin(0, 1);
-        this.sky2.setScrollFactor(1,0);
+        this.sky2.setScrollFactor(0.2,0);
         
         /////                           2
         this.sky3 = this.add.image(0, 448, 'sky-3').setOrigin(0, 1);
@@ -164,15 +195,20 @@ class Niveau1 extends Tableau{
         this.sky5 = this.add.image(0, 448, 'sky-5').setOrigin(0, 1);
         this.sky5.setScrollFactor(1, 0);
         /////
-        
+        this.tas = this.add.image(-50, 580, 'tas').setOrigin(0, 1);
+        this.tas.setScrollFactor(1, 1);
+        this.tas.setDepth(50);
+        this.tasf = this.add.image(-50, 580, 'tasf').setOrigin(0, 1);
+        this.tasf.setScrollFactor(1, 0.9);
+        this.tasf.setDepth(1);
         //this.sky.tileScaleX=this.sky.tileScaleY=0.8;
         
         
 
         //fait passer les éléments devant le ciel
         
-        this.stars.setDepth(10)
-        this.player.setDepth(10)
+        this.stars.setDepth(10);
+        this.player.setDepth(10);
 
         this.i = 0;
         this.j = 0;
@@ -181,10 +217,10 @@ class Niveau1 extends Tableau{
 
     update(time,delta){
         super.update();
-
+        this.tuto.alpha =1-(this.player.x/700);
         this.i += delta;
         this.j += delta;
-        //console.log(this.dirUp);
+        //console.log(this.player.x);
 
         if (this.i >= 700) {
             //console.log("+");
@@ -226,7 +262,7 @@ class Niveau1 extends Tableau{
         this.sky3.tilePositionX=this.cameras.main.scrollX*0.6;
         this.sky3.tilePositionY=this.cameras.main.scrollY*0.2-35;
         //le deuxième ciel se déplace moins vite pour accentuer l'effet
-        this.sky2.tilePositionX=this.cameras.main.scrollX*0.3+500;
+        this.sky2.tilePositionX=this.cameras.main.scrollX*0.3;
         this.sky2.tilePositionY = this.cameras.main.scrollY * 0.1;
 
         //his.mood.volume = 0

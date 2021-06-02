@@ -16,10 +16,20 @@ class Tableau extends Phaser.Scene {
      * Par défaut on charge un fond et le player
      */
     preload() {
-        this.load.image('sky', 'assets/0.png');
+        this.load.image('sky', 'assets/fond.png');
         this.load.image('spike', 'assets/spike.png');
         this.load.image('boom', 'assets/kaboom.png');
         this.load.image('boomE', 'assets/kaboomE.png');
+
+        this.load.spritesheet('lim',
+            'assets/lim.png',
+            { frameWidth: 42, frameHeight: 42 }
+        );
+
+        this.load.spritesheet('lxm',
+            'assets/lxm.png',
+            { frameWidth: 42, frameHeight: 42 }
+        );
 
         this.load.spritesheet('tir',
             'assets/concombre.png',
@@ -78,8 +88,8 @@ class Tableau extends Phaser.Scene {
          * Le joueur
          * @type {Player}
          */
-        this.player = new Player(this, 128, 485); //300 ou 
-
+        this.player = new Player(this, 128, 485); //300 ou 485
+         //this.player = new Player(this, 2500, 485); //300 ou 
         this.boom = this.add.sprite(this.sys.canvas.width / 2, this.sys.canvas.height / 2, "boom")
         this.boom.displayWidth = 64;
         this.boom.displayHeight = 64;
@@ -242,7 +252,8 @@ class Tableau extends Phaser.Scene {
             ){
                 ui.gagne();
                 this.sound.play('kill');
-                monster.isDead=true; //ok le monstre est mort
+                monster.isDead = true; //ok le monstre est mort
+                monster.Tmortlol()
                 monster.visible=false;
                 this.saigneE(monster,function(){
                     //à la fin de la petite anim...ben il se passe rien :)

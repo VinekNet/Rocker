@@ -206,9 +206,9 @@ class Player extends Phaser.Physics.Arcade.Sprite{
     }
 
     ramp() {
-        if (this.energy >= 25 && this.y>400) {
-
-                this.rampActiv = new Ramp(this.scene, this.x + 126*this.sens, 505);
+        //if (this.energy >= 25 && this.y>400) {
+        if (this.energy >= 25 ) {
+                this.rampActiv = new Ramp(this.scene, this.x + 126*this.sens, this.y+23);
 
             
             
