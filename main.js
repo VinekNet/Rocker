@@ -1,7 +1,8 @@
 
 let width=14*64; //896;
 let height=7*64; //448;
-
+var vid;
+var bg;
 let config = {
     type: Phaser.WEBGL,
 
@@ -10,11 +11,13 @@ let config = {
         default: 'arcade',
         arcade: {
             gravity: { y: 100*3 },
-            debug: true    ,
+            debug: true     ,
         }
     },
     scene: [
         new Ui(),
+        //new Niveau1("Neo-Frankfurt"),
+        new Menu("Menu"),
         new Niveau1("Neo-Frankfurt"),
         //new TableauTiledFou("LvlTiled WIP"),
         //new TableauBoss("Boss"),

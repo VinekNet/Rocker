@@ -2,6 +2,7 @@
  * Toutes les fonctions propres à un tableau dans notre jeu.
  * Cette classe n'est pas à utiliser directement, elle doit être extend !
  */
+
 class Tableau extends Phaser.Scene {
     /**
      *
@@ -17,7 +18,7 @@ class Tableau extends Phaser.Scene {
      */
     preload() {
         this.load.image('sky', 'assets/fond.png');
-
+        this.load.image('ground', 'assets/sol.png')
         this.load.image('boom', 'assets/kaboom.png');
         this.load.image('boomE', 'assets/kaboomE.png');
 
@@ -44,8 +45,10 @@ class Tableau extends Phaser.Scene {
         this.load.audio('ded', 'assets/clunk.wav');
         this.load.audio('jump', 'assets/jump+.wav');
         this.load.audio('kill', 'assets/killed.wav');
-
+     
         this.load.audio('shootin', 'assets/Shooshoot.wav');
+
+
 
         this.load.spritesheet('player',
             'assets/player.png',
@@ -89,8 +92,8 @@ class Tableau extends Phaser.Scene {
          * Le joueur
          * @type {Player}
          */
-        //this.player = new Player(this, 128, 485); //300 ou 485
-         this.player = new Player(this, 4300, 150   ); //300 ou 
+        this.player = new Player(this, 128, 485); //300 ou 485
+         //this.player = new Player(this, 4300, 150   ); //300 ou 
         this.boom = this.add.sprite(this.sys.canvas.width / 2, this.sys.canvas.height / 2, "boom")
         this.boom.displayWidth = 64;
         this.boom.displayHeight = 64;

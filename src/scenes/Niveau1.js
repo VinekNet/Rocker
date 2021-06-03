@@ -6,7 +6,7 @@ class Niveau1 extends Tableau{
        // var randImage = aImageFiles[Math.floor(Math.random()*aImageFiles.length)];
          
 
-        this.load.image('ground', 'assets/sol.png');
+        
         this.load.image('sky-2', 'assets/1.png');
         this.load.image('sky-3', 'assets/2.png');
         this.load.image('sky-4', 'assets/3.png');
@@ -20,11 +20,12 @@ class Niveau1 extends Tableau{
         this.load.image('NEOF5', 'assets/12.png');
         this.load.image('NEOF6', 'assets/13.png');
         this.load.image('NEOF7', 'assets/131.png');
+        this.load.image('ROOF', 'assets /ROOF.png');
         this.load.image('sun', 'assets/sun.png');
         this.load.image('tuto', 'assets/tuto.png');
         this.load.image('platforms', 'assets/plateforme1.png');
         this.load.image('platformsz', 'assets/plateforme2.png');
-
+        this.load.image('ground ', 'assets/sol.png')
         
         this.load.image('shield', 'assets/shield.png');
         
@@ -176,13 +177,20 @@ class Niveau1 extends Tableau{
         this.monsters = new Array();
         this.monster = new LXM(this, 700, height + 60);
         this.monster1 = new LIM(this,1100,height+60);
-        this.monster2 = new LIM(this,1400,height+60);
+        this.monster2 = new LIM(this, 1400, height + 60);
+        this.monster25 = new EnnemiTombe(this, 2500, 200);
+        this.monster26 = new EnnemiTombe(this, 8000, 200);
+        this.monster27 = new EnnemiTombe(this, 17000, 200);
+        this.monster2 = new LXM(this, 2800, height + 60);
         //this.monster3 = new Twomp(this,450,300);
         //this.monster4 = new Twomp(this, 1250, 300);
 
         this.monsters.push(this.monster);
         this.monsters.push(this.monster1);
         this.monsters.push(this.monster2);
+        this.monsters.push(this.monster25);
+        this.monsters.push(this.monster26);
+        this.monsters.push(this.monster27);
         this.monsters.push(this.monster3);
         this.monsters.push(this.monster4);
 
@@ -223,24 +231,31 @@ class Niveau1 extends Tableau{
         this.sun.setDepth(-0.1);
         /////   
         this.sky2 = this.add.image(0, 448, 'sky-2').setOrigin(0, 1);
-        this.sky2.setScrollFactor(0.2,0);
+        this.sky2.setScrollFactor(0.2, 0);
+        
         
         /////                           2
         this.sky3 = this.add.image(0, 448, 'sky-3').setOrigin(0, 1);
-        this.sky3.setScrollFactor(1, 0);
+        this.sky3.setScrollFactor(0.2, 0);
         /////                           3
-        this.sky4 = this.add.image(0, 448, 'sky-4').setOrigin(0, 1);
-        this.sky4.setScrollFactor(0.8,0);
+        this.sky4 = this.add.image(0, 444, 'sky-4').setOrigin(0, 1);
+        this.sky4.setScrollFactor(0.3,0);
         /////                           4
         this.sky5 = this.add.image(0, 448, 'sky-5').setOrigin(0, 1);
-        this.sky5.setScrollFactor(1, 0);
+        this.sky5.setScrollFactor(0.2, 0);
+
+
+        this.sky2.setDepth(-0.04)
+        this.sky3.setDepth(-0.03)
+        this.sky4.setDepth(0.01)
+        this.sky5.setDepth(0.009)
         /////
         this.tas = this.add.image(-50, 580, 'tas').setOrigin(0, 1);
         this.tas.setScrollFactor(1, 1);
         this.tas.setDepth(50);
         this.tasf = this.add.image(-50, 580, 'tasf').setOrigin(0, 1);
         this.tasf.setScrollFactor(1, 0.9);
-        this.tasf.setDepth(1);
+        this.tasf.setDepth(0.1);
         //this.sky.tileScaleX=this.sky.tileScaleY=0.8;
         /////                                                           /////NEOF
         this.n1 = this.add.image(0, 448, 'NEOF').setOrigin(0, 1);
@@ -248,18 +263,24 @@ class Niveau1 extends Tableau{
         this.n1.setDepth(-1);
         ////
         this.b1 = this.add.image(0, 448, 'NEOF2').setOrigin(0, 1);
-        this.b1.setScrollFactor(0.8, 0);
-        this.b1.setDepth(0.1);
+        this.b1.setScrollFactor(0.7, 0);
+        this.b1.setDepth(0.081);
         this.b2 = this.add.image(0, 448, 'NEOF3').setOrigin(0, 1);
-        this.b2.setScrollFactor(0.85, 0);
-        this.b2.setDepth(0.11);
+        this.b2.setScrollFactor(0.8, 0);
+        this.b2.setDepth(0.0811);
         this.b3 = this.add.image(0, 448, 'NEOF4').setOrigin(0, 1);
         this.b3.setScrollFactor(0.90, 0);
-        this.b3.setDepth(0.111);
+        this.b3.setDepth(0.08111);
         ////
         this.n2 = this.add.image(0, 400, 'NEOF5').setOrigin(0, 1);
         this.n2.setScrollFactor(1, 0);
-        this.n2.setDepth(0.2);
+        this.n2.setDepth(0.09);
+        this.n21 = this.add.image(0, 450, 'NEOF5').setOrigin(0, 1);
+        this.n21.setScrollFactor(1, 0);
+        this.n21.setDepth(0.09);
+        this.n22 = this.add.image(0, 500, 'NEOF5').setOrigin(0, 1);
+        this.n22.setScrollFactor(1, 0);
+        this.n22.setDepth(0.09);
         ///
         this.n3 = this.add.image(-50, 592, 'NEOF6').setOrigin(0, 1);
         this.n3.setScrollFactor(1, 1);
@@ -267,6 +288,10 @@ class Niveau1 extends Tableau{
         this.n4 = this.add.image(-50, 592, 'NEOF7').setOrigin(0, 1);
         this.n4.setScrollFactor(1, 1);
         this.n4.setDepth(0.3);
+        ////////////////
+        this.r1 = this.add.image(0, 448, 'ROOF').setOrigin(0, 1);
+        this.r1.setScrollFactor(1, 0);
+        this.r1.setDepth(-1);
         //fait passer les éléments devant le ciel
         
         this.stars.setDepth(10);
@@ -279,7 +304,7 @@ class Niveau1 extends Tableau{
 
     update(time,delta){
         super.update();
-        this.tuto.alpha =1-(this.player.x/700);
+        this.tuto.alpha =1-((this.player.x-138)/700);
         this.i += delta;
         this.j += delta;
         //console.log(this.player.x);

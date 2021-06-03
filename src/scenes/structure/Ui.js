@@ -9,6 +9,7 @@
         this.load.image('energyBack', 'assets/ui/stormBack.png');
         this.load.image('energyContainer', 'assets/ui/stormEmpty.png');
         this.load.image('energyFilled', 'assets/ui/stormFull.png');
+        this.load.image('energyMask', 'assets/ui/stormMask.png');
     }
     create (){
         console.log("create Ui")
@@ -28,12 +29,12 @@
          * Le champ texte avec la clé du tableau
          * @type {Phaser.GameObjects.Text}
          * @private
-         */
+         
         this._tableauText = this.add.text(this.sys.canvas.width-16, 16, '...', {
             font:'32px "Hanalei Fill"',
             align: 'right',
             fill: '#fff'
-        })
+        })*/
 
         /**
          * Le champ texte avec la classe du tableau
@@ -55,10 +56,11 @@
         })*/
 
         //met l'ui au dessus du tableau
+        
         this.scene.bringToTop();
         //lance le tableau
         this.scene.launch(this.game.scene.scenes[0].scene.key);
-
+        
 
         let me=this;
         setTimeout(function(){
@@ -93,13 +95,18 @@
         btFs.setDisplaySize(48,48)
         btFs.x=this.sys.canvas.width;
         btFs.y=this.sys.canvas.height;
-        this.containerBG = this.physics.add.sprite(75, 90, 'energyBack');
+        this.containerBG = this.physics.add.sprite(825, 90, 'energyBack');
         this.containerBG.body.enable = false;
-        this.energyFill = this.physics.add.sprite(43, 90+60, 'energyFilled');
+        this.energyFill = this.physics.add.sprite(825 - 32, 90 + 60, 'energyFilled');
         this.energyFill.body.enable = false;
         this.energyFill.setOrigin(0, 1);
-        this.containerEnergy = this.physics.add.sprite(75, 90, 'energyContainer');
+        this.containerEnergy = this.physics.add.sprite(825, 90, 'energyContainer');
         this.containerEnergy.body.enable = false;
+        this.mask = this.physics.add.sprite(825, 90, 'energyMask');
+        this.mask.body.enable = false;
+        
+        this.energyFill.mask = new Phaser.Display.Masks.BitmapMask(this, this.mask);
+        this.mask.visible = false;
     }
 
     gagne(points=10)

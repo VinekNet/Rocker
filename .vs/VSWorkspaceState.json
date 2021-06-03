@@ -6,12 +6,11 @@
     "\\src\\objects\\ui",
     "\\src\\scenes",
     "\\src\\scenes\\structure",
-    "\\vendor",
     "\\vendor\\phaser-3.50.0",
     "\\vendor\\phaser-3.50.0\\scripts",
     "\\vendor\\phaser-3.50.0\\scripts\\tsgen",
     "\\vendor\\phaser-3.50.0\\scripts\\tsgen\\src"
   ],
-  "SelectedNode": "\\src\\objects\\ui\\GamePad.js",
+  "SelectedNode": "\\src\\objects\\ui\\start.js",
   "PreviewInSolutionExplorer": false
 }
