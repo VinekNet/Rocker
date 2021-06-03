@@ -2,10 +2,10 @@ class Niveau1 extends Tableau{
 
     preload() {
         super.preload();
-        var aImageFiles = ['monstre', 'monstre2', 'monstre3', 'monstre4'];
-        var randImage = aImageFiles[Math.floor(Math.random()*aImageFiles.length)];
+       // var aImageFiles = ['monstre', 'monstre2', 'monstre3', 'monstre4'];
+       // var randImage = aImageFiles[Math.floor(Math.random()*aImageFiles.length)];
          
-        this.load.image('star', 'assets/bolt.png');
+
         this.load.image('ground', 'assets/sol.png');
         this.load.image('sky-2', 'assets/1.png');
         this.load.image('sky-3', 'assets/2.png');
@@ -13,12 +13,18 @@ class Niveau1 extends Tableau{
         this.load.image('sky-5', 'assets/4.png');
         this.load.image('tas', 'assets/tas.png');
         this.load.image('tasf', 'assets/tasfond.png');
+        this.load.image('NEOF', 'assets/10.png');
+        this.load.image('NEOF2', 'assets/110.png');
+        this.load.image('NEOF3', 'assets/111.png');
+        this.load.image('NEOF4', 'assets/112.png');
+        this.load.image('NEOF5', 'assets/12.png');
+        this.load.image('NEOF6', 'assets/13.png');
+        this.load.image('NEOF7', 'assets/131.png');
         this.load.image('sun', 'assets/sun.png');
         this.load.image('tuto', 'assets/tuto.png');
         this.load.image('platforms', 'assets/plateforme1.png');
         this.load.image('platformsz', 'assets/plateforme2.png');
-        this.load.image('monster-pattern', 'assets/' + randImage + '.png');
-        this.load.image('twomp', 'assets/twompmonstre.png');
+
         
         this.load.image('shield', 'assets/shield.png');
         
@@ -69,6 +75,8 @@ class Niveau1 extends Tableau{
         
         this.platforms = this.physics.add.group();
         this.platformsz = this.physics.add.group();
+        this.platformszz = this.physics.add.group();
+        this.platformszzz = this.physics.add.group();
 
         this.platforms.create(550, height, 'platforms'); //1
         this.platforms.create(650, height - 100, 'platforms');//2
@@ -77,15 +85,23 @@ class Niveau1 extends Tableau{
         this.platforms.create(1100, 180, 'platforms');//5
         this.platforms.create(1320, 300, 'platforms');//6
         this.platforms.create(1600, 280, 'platforms');//7
-        this.platformsz.create(1805, 500, 'platforms');//8
-        this.platformsz.create(1900, 465, 'platforms');//9
-        this.platformsz.create(1932, 409, 'platforms');//10
-        this.platformsz.create(1955, 366, 'platforms');//11
-        this.platformsz.create(1970, 366, 'platforms');//11.5
-        this.platformsz.create(2116, 320, 'platforms');//12
-        this.platformsz.create(2193, 320, 'platforms');//13
-        this.platformsz.create(2260, 415, 'platforms');//14
-        this.platformsz.create(2395, 506, 'platforms');//15
+        this.platformsz.create(1805, 500, 'platformsz');//8
+        this.platformsz.create(1900, 465, 'platformsz');//9
+        this.platformsz.create(1932, 409, 'platformsz');//10
+        this.platformsz.create(1955, 366, 'platformsz');//11
+        this.platformsz.create(1970, 366, 'platformsz');//11.5
+        this.platformsz.create(2116, 320, 'platformsz');//12
+        this.platformsz.create(2193, 320, 'platformsz');//13
+        this.platformsz.create(2260, 415, 'platformsz');//14
+        this.platformsz.create(2395, 506, 'platformsz');//15
+
+        this.platformszz.create(3075, 434, 'platformsz');//16
+        this.platformszzz.create(3279, 340, 'platformsz');//17
+        this.platformszz.create(3775, 434, 'platformsz');//18
+        this.platformszzz.create(3979, 340, 'platformsz');//19
+        this.platformszzz.create(4122, 335, 'platformsz');//20
+        this.platformszz.create(4308, 250, 'platformsz');//21
+        this.platformszzz.create(4502, 154, 'platformsz');//22
         //this.platforms.create(1900, height - 200, 'platforms');//7.5
 
             
@@ -110,12 +126,35 @@ class Niveau1 extends Tableau{
             child.setDepth(10);
             child.setFriction(1); //les éléments ne glissent pas dessus cette plateforme
         });
+        this.platformszz.children.iterate(function (child) {
+            child.setImmovable(true);
+            child.body.allowGravity = false;
+            child.setVelocityX(0);
+            child.setBounceX(1);
+            child.setDisplaySize(105, 16);
+            child.setCollideWorldBounds(true);
+            child.setDepth(-15);
+            child.setFriction(1); //les éléments ne glissent pas dessus cette plateforme
+        });
+        this.platformszzz.children.iterate(function (child) {
+            child.setImmovable(true);
+            child.body.allowGravity = false;
+            child.setVelocityX(0);
+            child.setBounceX(1);
+            child.setDisplaySize(95, 16);
+            child.setCollideWorldBounds(true);
+            child.setDepth(-15);
+            child.setFriction(1); //les éléments ne glissent pas dessus cette plateforme
+        });
            
             
 
         this.physics.add.collider(this.player, this.platforms);
 
         this.physics.add.collider(this.player, this.platformsz);
+
+        this.physics.add.collider(this.player, this.platformszz);
+        this.physics.add.collider(this.player, this.platformszzz);
             this.stars=this.physics.add.group();
             /*this.stars.create(400,100,"star");
             this.stars.create(860,255,"star");
@@ -181,6 +220,7 @@ class Niveau1 extends Tableau{
         /////
         this.sun = this.add.image(600, 132, 'sun').setOrigin(0, 1);
         this.sun.setScrollFactor(0, 0);
+        this.sun.setDepth(-0.1);
         /////   
         this.sky2 = this.add.image(0, 448, 'sky-2').setOrigin(0, 1);
         this.sky2.setScrollFactor(0.2,0);
@@ -202,9 +242,31 @@ class Niveau1 extends Tableau{
         this.tasf.setScrollFactor(1, 0.9);
         this.tasf.setDepth(1);
         //this.sky.tileScaleX=this.sky.tileScaleY=0.8;
-        
-        
-
+        /////                                                           /////NEOF
+        this.n1 = this.add.image(0, 448, 'NEOF').setOrigin(0, 1);
+        this.n1 .setScrollFactor(1, 0);
+        this.n1.setDepth(-1);
+        ////
+        this.b1 = this.add.image(0, 448, 'NEOF2').setOrigin(0, 1);
+        this.b1.setScrollFactor(0.8, 0);
+        this.b1.setDepth(0.1);
+        this.b2 = this.add.image(0, 448, 'NEOF3').setOrigin(0, 1);
+        this.b2.setScrollFactor(0.85, 0);
+        this.b2.setDepth(0.11);
+        this.b3 = this.add.image(0, 448, 'NEOF4').setOrigin(0, 1);
+        this.b3.setScrollFactor(0.90, 0);
+        this.b3.setDepth(0.111);
+        ////
+        this.n2 = this.add.image(0, 400, 'NEOF5').setOrigin(0, 1);
+        this.n2.setScrollFactor(1, 0);
+        this.n2.setDepth(0.2);
+        ///
+        this.n3 = this.add.image(-50, 592, 'NEOF6').setOrigin(0, 1);
+        this.n3.setScrollFactor(1, 1);
+        this.n3.setDepth(0.3);
+        this.n4 = this.add.image(-50, 592, 'NEOF7').setOrigin(0, 1);
+        this.n4.setScrollFactor(1, 1);
+        this.n4.setDepth(0.3);
         //fait passer les éléments devant le ciel
         
         this.stars.setDepth(10);

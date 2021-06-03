@@ -40,7 +40,7 @@
          * @type {Phaser.GameObjects.Text}
          * @private
          */
-        this._tableauTextClass = this.add.text(this.sys.canvas.width-16, 16+32, '...', {
+        /*this._tableauTextClass = this.add.text(this.sys.canvas.width-16, 16+32, '...', {
             font:'24px "Hanalei Fill"',
             align: 'right',
             fill: '#fff',
@@ -52,7 +52,7 @@
         this._tableauText.setInteractive();
         this._tableauText.on('pointerdown', function () {
             Tableau.suivant();
-        })
+        })*/
 
         //met l'ui au dessus du tableau
         this.scene.bringToTop();
@@ -114,8 +114,8 @@
 
     update(){
         if(Tableau.current){
-            this._tableauText.setText(Tableau.current.scene.key);
-            this._tableauTextClass.setText(Tableau.current.constructor.name);
+            //this._tableauText.setText(Tableau.current.scene.key);
+            //this._tableauTextClass.setText(Tableau.current.constructor.name);
         }
     }
 }

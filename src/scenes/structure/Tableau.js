@@ -17,7 +17,7 @@ class Tableau extends Phaser.Scene {
      */
     preload() {
         this.load.image('sky', 'assets/fond.png');
-        this.load.image('spike', 'assets/spike.png');
+
         this.load.image('boom', 'assets/kaboom.png');
         this.load.image('boomE', 'assets/kaboomE.png');
 
@@ -44,7 +44,7 @@ class Tableau extends Phaser.Scene {
         this.load.audio('ded', 'assets/clunk.wav');
         this.load.audio('jump', 'assets/jump+.wav');
         this.load.audio('kill', 'assets/killed.wav');
-        this.load.audio('pick', 'assets/coin.wav');
+
         this.load.audio('shootin', 'assets/Shooshoot.wav');
 
         this.load.spritesheet('player',
@@ -73,7 +73,7 @@ class Tableau extends Phaser.Scene {
         this.sys.scene.scale.lockOrientation("landscape")
         this.sound.add('ded');
         this.sound.add('kill');
-        this.sound.add('pick');
+
 
         console.log("On est sur " + this.constructor.name + " / " + this.scene.key);
         /**
@@ -84,12 +84,13 @@ class Tableau extends Phaser.Scene {
         this.sky.displayWidth = 14 * 64 * 8
             ;
         this.sky.setScrollFactor(1, 0);
+        this.sky.setDepth(-2);
         /**
          * Le joueur
          * @type {Player}
          */
-        this.player = new Player(this, 128, 485); //300 ou 485
-         //this.player = new Player(this, 2500, 485); //300 ou 
+        //this.player = new Player(this, 128, 485); //300 ou 485
+         this.player = new Player(this, 4300, 150   ); //300 ou 
         this.boom = this.add.sprite(this.sys.canvas.width / 2, this.sys.canvas.height / 2, "boom")
         this.boom.displayWidth = 64;
         this.boom.displayHeight = 64;
