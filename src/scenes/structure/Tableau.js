@@ -281,6 +281,7 @@ class Tableau extends Phaser.Scene {
                     me.player.visible=false;
                     this.mood.stop();
                     this.mood2.stop();
+                    this.mood3.stop();
                     this.sound.play('ded');
                     //ça saigne...
                     me.saigne(me.player,function(){

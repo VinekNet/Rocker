@@ -38,10 +38,10 @@ class Niveau1 extends Tableau{
         
         this.load.image('shield', 'assets/shield.png');
         
-
+        this.load.audio('zik3', 'assets/roof.wav');
         this.load.audio('zik2', 'assets/NeoF.wav');
+        this.load.audio('zik1', 'assets/beach3.wav');
 
-       this.load.audio('zik1', 'assets/beach3.wav');
 
 
     }
@@ -52,11 +52,15 @@ class Niveau1 extends Tableau{
         this.mood2 = this.sound.add('zik2');
         this.mood.volume = 0;
         this.mood2.volume = 0;
+        this.mood3 = this.sound.add('zik3');
+        this.mood3.volume = 0;
 
         this.mood.loop = true;
         this.mood.play();
         this.mood2.loop = true;
         this.mood2.play();
+        this.mood3.loop = true;
+        this.mood3.play();
         
 
         //on définit la taille du tableau
@@ -87,8 +91,8 @@ class Niveau1 extends Tableau{
             
         }
         
-        
-        
+        //6264 + 125, 260
+        //this.Trou
         
         this.platforms = this.physics.add.group();
         this.platformsz = this.physics.add.group();
@@ -435,16 +439,32 @@ class Niveau1 extends Tableau{
         //his.mood.volume = 0
         //this.mood2.volume =0
         if (this.player.x >= 2500) {
-            this.mood.volume = 0
+            this.mood.volume = 0;
         }
         else { this.mood.volume = (1 - (this.player.x / (896 * 3))) / 3; }
         //console.log(this.mood.volume);
         //this.mood2.volume = ((this.player.x / (896 * 8)))/3;
-        this.mood2.volume = ((this.player.x / (896 * 3))) / 3;
+        if (this.player.x >= 4500) {
+            this.mood2.volume = 0;
+        }
+   
+       
+        else { this.mood2.volume = ((this.player.x / (896 * 3))) / 3; }
         //console.log(this.mood2.volume);
+        if (this.player.x <= 3000) {
+            this.mood3.volume = 0;
+        }
 
-        //console.log(this.player.x);
+
+        else {
+            this.mood3.volume = (((this.player.x - 2500) / (896 * 3))) / 3;
+        }
+        //console.log((((this.player.x - 2500) / (896 * 3))) / 3);
+        console.log(this.mood3.volume);
+
     }
+        
+    
 
 
 
