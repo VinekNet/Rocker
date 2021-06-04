@@ -42,9 +42,9 @@ class Menu extends Tableau {
             
             
             this.back.resume();
-            bg = this.add.image(14 * 64 / 2, 7 * 64 / 2, 'MenuArt');
-            bg.setDisplaySize(14 * 64, 7 * 64);
-            bg.setDepth(201);
+            this.bg = this.add.image(14 * 64 / 2, 7 * 64 / 2, 'MenuArt');
+            this.bg.setDisplaySize(14 * 64, 7 * 64);
+            this.bg.setDepth(201);
             if (this.pasfait) {
                 this.tuch = new Start(this, 0, 0);
                 this.tuch.y = this.sys.canvas.height / 2 - this.tuch.size - 32;

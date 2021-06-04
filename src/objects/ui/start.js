@@ -1,5 +1,5 @@
 /**
- * Un objet qui écoute les touches du clavier et mouvements sur le pad et qui influent le déplacement du joueur
+ * Un objet qui ï¿½coute les touches du clavier et mouvements sur le pad et qui influent le dï¿½placement du joueur
  */
 class Start extends Phaser.GameObjects.Container {
 
@@ -56,7 +56,7 @@ class Start extends Phaser.GameObjects.Container {
             starttextb.alpha = 0.5;
 
                 Tableau.current.back.stop();
-           
+                
             Tableau.suivant();
         })
         /////////////
