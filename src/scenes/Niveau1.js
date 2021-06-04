@@ -23,12 +23,12 @@ class Niveau1 extends Tableau{
         this.load.image('NEOF6', 'assets/13.png');
         this.load.image('NEOF7', 'assets/131.png');
 
-        this.load.image('ROOF', 'assets /ROOF.png');
-        this.load.image('PRf', 'assets /PRf.png');
+        this.load.image('ROOF', 'assets/ROOF.png');
+        this.load.image('PRf', 'assets/PRf.png');
 
-        this.load.image('r2', 'assets /r2.png');
-        this.load.image('r3', 'assets /r3.png');
-        this.load.image('r4', 'assets /r4.png');
+        this.load.image('r2', 'assets/r2.png');
+        this.load.image('r3', 'assets/r3.png');
+        this.load.image('r4', 'assets/r4.png');
 
         this.load.image('sun', 'assets/sun.png');
         this.load.image('tuto', 'assets/tuto.png');
