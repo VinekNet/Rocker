@@ -137,7 +137,7 @@ class Niveau1 extends Tableau{
            this.ROOF3.create(6264 + 125, 260, 'ROOF2');//24
         //this.platforms.create(1900, height - 200, 'platforms');//7.5
 
-        this.trou = New Trou(6264 + 125, 260);
+        //this.trou = New Trou(6264 + 125, 260);
 
             this.platforms.children.iterate(function (child) {
                 child.setImmovable(true);
