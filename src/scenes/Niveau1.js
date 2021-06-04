@@ -61,6 +61,8 @@ class Niveau1 extends Tableau{
         this.mood2.play();
         this.mood3.loop = true;
         this.mood3.play();
+
+        this.canEnd = true;
         
 
         //on définit la taille du tableau
@@ -386,7 +388,7 @@ class Niveau1 extends Tableau{
         this.dirUp = false;
     }
 
-    update(time,delta){
+    update(time, delta) {
         super.update();
         this.tuto.alpha =1-((this.player.x-138)/700);
         this.i += delta;
@@ -460,9 +462,21 @@ class Niveau1 extends Tableau{
             this.mood3.volume = (((this.player.x - 2500) / (896 * 3))) / 3;
         }
         //console.log((((this.player.x - 2500) / (896 * 3))) / 3);
-        console.log(this.mood3.volume);
+        //console.log(this.mood3.volume);
+
+        //FIN
+        if (this.player.x > 7150 && this.canEnd) {
+            this.cameras.main.fadeOut(1000, 0, 0, 0);
+            this.canEnd = false;
+            
+            setTimeout(function () {
+                Phaser.scene.start("Menu");
+            }, 1000);
+        }
 
     }
+
+    
         
     
 
