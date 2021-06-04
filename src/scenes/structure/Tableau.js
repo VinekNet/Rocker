@@ -22,6 +22,16 @@ class Tableau extends Phaser.Scene {
         this.load.image('boom', 'assets/kaboom.png');
         this.load.image('boomE', 'assets/kaboomE.png');
 
+        this.load.spritesheet('GDucky',
+            'assets/GDucky.png',
+            { frameWidth: 64, frameHeight: 28 }
+        );
+
+        this.load.spritesheet('fall',
+            'assets/fall.png',
+            { frameWidth: 32, frameHeight: 64 }
+        );
+
         this.load.spritesheet('lim',
             'assets/lim.png',
             { frameWidth: 42, frameHeight: 42 }
@@ -86,14 +96,14 @@ class Tableau extends Phaser.Scene {
         this.sky = this.add.image(0, 448, 'sky').setOrigin(0, 1);
         this.sky.displayWidth = 14 * 64 * 8
             ;
-        this.sky.setScrollFactor(1, 0);
+        this.sky.setScrollFactor(0, 0);
         this.sky.setDepth(-2);
         /**
          * Le joueur
          * @type {Player}
          */
-        this.player = new Player(this, 128, 485); //300 ou 485
-         //this.player = new Player(this, 4300, 150   ); //300 ou 
+        //this.player = new Player(this, 128, 485); //300 ou 485
+         this.player = new Player(this, 5635, 0   ); //300 ou 
         this.boom = this.add.sprite(this.sys.canvas.width / 2, this.sys.canvas.height / 2, "boom")
         this.boom.displayWidth = 64;
         this.boom.displayHeight = 64;

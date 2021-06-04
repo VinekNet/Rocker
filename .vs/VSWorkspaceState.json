@@ -5,12 +5,8 @@
     "\\src\\objects",
     "\\src\\objects\\ui",
     "\\src\\scenes",
-    "\\src\\scenes\\structure",
-    "\\vendor\\phaser-3.50.0",
-    "\\vendor\\phaser-3.50.0\\scripts",
-    "\\vendor\\phaser-3.50.0\\scripts\\tsgen",
-    "\\vendor\\phaser-3.50.0\\scripts\\tsgen\\src"
+    "\\src\\scenes\\structure"
   ],
-  "SelectedNode": "\\src\\objects\\ui\\start.js",
+  "SelectedNode": "\\src\\objects\\EnnemiTombe.js",
   "PreviewInSolutionExplorer": false
 }

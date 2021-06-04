@@ -11,8 +11,10 @@ class Niveau1 extends Tableau{
         this.load.image('sky-3', 'assets/2.png');
         this.load.image('sky-4', 'assets/3.png');
         this.load.image('sky-5', 'assets/4.png');
+
         this.load.image('tas', 'assets/tas.png');
         this.load.image('tasf', 'assets/tasfond.png');
+
         this.load.image('NEOF', 'assets/10.png');
         this.load.image('NEOF2', 'assets/110.png');
         this.load.image('NEOF3', 'assets/111.png');
@@ -20,7 +22,14 @@ class Niveau1 extends Tableau{
         this.load.image('NEOF5', 'assets/12.png');
         this.load.image('NEOF6', 'assets/13.png');
         this.load.image('NEOF7', 'assets/131.png');
+
         this.load.image('ROOF', 'assets /ROOF.png');
+        this.load.image('PRf', 'assets /PRf.png');
+
+        this.load.image('r2', 'assets /r2.png');
+        this.load.image('r3', 'assets /r3.png');
+        this.load.image('r4', 'assets /r4.png');
+
         this.load.image('sun', 'assets/sun.png');
         this.load.image('tuto', 'assets/tuto.png');
         this.load.image('platforms', 'assets/plateforme1.png');
@@ -53,10 +62,14 @@ class Niveau1 extends Tableau{
         //on définit la taille du tableau
         let largeurDuTableau=896*8  ;
         let hauteurDuTableau=448+152; 
-        this.cameras.main.setBounds(0, 0, largeurDuTableau, hauteurDuTableau);
-        this.physics.world.setBounds(0, 0, largeurDuTableau,  hauteurDuTableau);
+        this.cameras.main.setBounds(0, -200, largeurDuTableau, hauteurDuTableau+200);
+        this.physics.world.setBounds(0, -200, largeurDuTableau,  hauteurDuTableau+200);
 
         this.cameras.main.startFollow(this.player, false, 0.05, 0.05);
+
+        this.monster25 = new EnnemiTombe(this, 2500, 200);
+        this.monster26 = new EnnemiTombe(this, 4000, 200);
+        this.monster27 = new EnnemiTombe(this, 6000, 200);
 
         for(let i=0 ;i<=largeurDuTableau/896;i++){
             let ground=this.physics.add.sprite(i*896,536,"ground");
@@ -65,6 +78,9 @@ class Niveau1 extends Tableau{
             ground.body.allowGravity=0; //la gravité n'a pas d'effet ici
             ground.setImmovable(true); //ne bouge pas quand on rentre dedans
             this.physics.add.collider(this.player, ground);//le joueur rebondit dessus*/*
+            this.physics.add.collider(this.monster25, ground);
+            this.physics.add.collider(this.monster26, ground);
+            this.physics.add.collider(this.monster27, ground);
             ground.setScrollFactor(1);
             ground.setDepth(60);
             ground.tilePositionX=this.cameras.main.scrollX*0.6;
@@ -78,6 +94,11 @@ class Niveau1 extends Tableau{
         this.platformsz = this.physics.add.group();
         this.platformszz = this.physics.add.group();
         this.platformszzz = this.physics.add.group();
+
+        this.ROOF = this.physics.add.group();
+        this.ROOF2 = this.physics.add.group();
+        this.ROOF3 = this.physics.add.group();
+
 
         this.platforms.create(550, height, 'platforms'); //1
         this.platforms.create(650, height - 100, 'platforms');//2
@@ -103,6 +124,11 @@ class Niveau1 extends Tableau{
         this.platformszzz.create(4122, 335, 'platformsz');//20
         this.platformszz.create(4308, 250, 'platformsz');//21
         this.platformszzz.create(4502, 154, 'platformsz');//22
+
+        this.ROOF.create(4742 + 212, 347, 'ROOF');//23
+        this.ROOF2.create(5296 + 175, 260, 'ROOF2');//24
+        this.ROOF2.create(5768 + 175, 180, 'ROOF2');//25
+           this.ROOF3.create(6264 + 125, 260, 'ROOF2');//24
         //this.platforms.create(1900, height - 200, 'platforms');//7.5
 
             
@@ -148,7 +174,38 @@ class Niveau1 extends Tableau{
             child.setFriction(1); //les éléments ne glissent pas dessus cette plateforme
         });
            
-            
+        this.ROOF.children.iterate(function (child) {
+            child.setImmovable(true);
+            child.body.allowGravity = false;
+            child.setVelocityX(0);
+            child.setBounceX(1);
+            child.setDisplaySize(424, 400);
+            child.setCollideWorldBounds(true);
+            child.setDepth(-15);
+            child.setFriction(1); //les éléments ne glissent pas dessus cette plateforme
+        });
+        
+        this.ROOF2.children.iterate(function (child) {
+            child.setImmovable(true);
+            child.body.allowGravity = false;
+            child.setVelocityX(0);
+            child.setBounceX(1);
+            child.setDisplaySize(350, 400);
+            child.setCollideWorldBounds(true);
+            child.setDepth(-15);
+            child.setFriction(1); //les éléments ne glissent pas dessus cette plateforme
+        });
+        this.ROOF3.children.iterate(function (child) {
+            child.setImmovable(true);
+            child.body.allowGravity = false;
+            child.setVelocityX(0);
+            child.setBounceX(1);
+            child.setDisplaySize(250, 400);
+            child.setCollideWorldBounds(true);
+            child.setDepth(-15);
+            child.setFriction(1); //les éléments ne glissent pas dessus cette plateforme
+        });
+
 
         this.physics.add.collider(this.player, this.platforms);
 
@@ -156,6 +213,9 @@ class Niveau1 extends Tableau{
 
         this.physics.add.collider(this.player, this.platformszz);
         this.physics.add.collider(this.player, this.platformszzz);
+        this.physics.add.collider(this.player, this.ROOF);
+        this.physics.add.collider(this.player, this.ROOF2);
+        this.physics.add.collider(this.player, this.ROOF3);
             this.stars=this.physics.add.group();
             /*this.stars.create(400,100,"star");
             this.stars.create(860,255,"star");
@@ -178,16 +238,22 @@ class Niveau1 extends Tableau{
         this.monster = new LXM(this, 700, height + 60);
         this.monster1 = new LIM(this,1100,height+60);
         this.monster2 = new LIM(this, 1400, height + 60);
-        this.monster25 = new EnnemiTombe(this, 2500, 200);
-        this.monster26 = new EnnemiTombe(this, 8000, 200);
-        this.monster27 = new EnnemiTombe(this, 17000, 200);
-        this.monster2 = new LXM(this, 2800, height + 60);
+        this.monster3 = new LXM(this, 5000, 116);
+        this.monster4 = new LXM(this, 5950, -49);
+        this.monster5= new LIM(this, 6750, height + 60);
+        this.monster6 = new LXM(this, 2800, height + 60);
+        
+
         //this.monster3 = new Twomp(this,450,300);
         //this.monster4 = new Twomp(this, 1250, 300);
 
         this.monsters.push(this.monster);
         this.monsters.push(this.monster1);
         this.monsters.push(this.monster2);
+        this.monsters.push(this.monster3);
+        this.monsters.push(this.monster4);
+        this.monsters.push(this.monster5);
+        this.monsters.push(this.monster6);
         this.monsters.push(this.monster25);
         this.monsters.push(this.monster26);
         this.monsters.push(this.monster27);
@@ -289,9 +355,23 @@ class Niveau1 extends Tableau{
         this.n4.setScrollFactor(1, 1);
         this.n4.setDepth(0.3);
         ////////////////
-        this.r1 = this.add.image(0, 448, 'ROOF').setOrigin(0, 1);
-        this.r1.setScrollFactor(1, 0);
-        this.r1.setDepth(-1);
+        
+
+        this.PRf = this.add.image(0, 592, 'PRf').setOrigin(0, 1);
+        this.PRf.setScrollFactor(1, 1);
+        this.PRf.setDepth(20);
+        ///
+        this.r2 = this.add.image(-500, 448, 'r2').setOrigin(0, 1);
+        this.r2.setScrollFactor(0.7, 0);
+        this.r2.setDepth(1.081);
+        
+        this.r3 = this.add.image(-500, 448, 'r3').setOrigin(0, 1);
+        this.r3.setScrollFactor(0.9, 0);
+        this.r3.setDepth(1.0911);
+
+        this.r2 = this.add.image(-450, 448, 'r2').setOrigin(0, 1);
+        this.r2.setScrollFactor(0.8, 0);
+        this.r2.setDepth(1.08111);
         //fait passer les éléments devant le ciel
         
         this.stars.setDepth(10);

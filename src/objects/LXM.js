@@ -21,8 +21,8 @@ class LXM extends ObjetEnnemi {
 
         // X
         this.originalX = x;
-        this.minX = x + 200;
-        this.maxX = x - 200;
+        this.minX = x + 150;
+        this.maxX = x - 150;
 
         // Y
         this.originalY = y;

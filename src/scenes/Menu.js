@@ -8,7 +8,7 @@ class Menu extends Tableau {
         this.load.image('MenuArt', 'assets/Menu.png');
         this.load.audio('MenuZik', 'assets/Menu.mp3');
 
-
+        this.load.audio('clic','assets/jump.wav')
 
 
 
