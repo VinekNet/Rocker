@@ -468,11 +468,11 @@ class Niveau1 extends Tableau{
         if (this.player.x > 7150 && this.canEnd) {
             this.cameras.main.fadeOut(1000, 0, 0, 0);
             this.canEnd = false;
-            
-            setTimeout(function () {
-                this.mood.stop();
+            this.mood.stop();
                     this.mood2.stop();
                     this.mood3.stop();
+            setTimeout(function () {
+                
                 Tableau.suivant();
                 
             }, 1000);
