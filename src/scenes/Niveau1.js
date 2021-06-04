@@ -470,7 +470,11 @@ class Niveau1 extends Tableau{
             this.canEnd = false;
             
             setTimeout(function () {
+                this.mood.stop();
+                    this.mood2.stop();
+                    this.mood3.stop();
                 Tableau.suivant();
+                
             }, 1000);
         }
 
