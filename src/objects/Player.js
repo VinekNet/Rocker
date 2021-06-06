@@ -186,7 +186,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         if (this.energy >= 5) {
             this.scene.sound.play('shootin');
             var bullet = new Shoot(this.scene, this.x + 20 * this.sens, this.y - 10);
-            console.log("Tir");
+            //console.log("Tir");
             setTimeout(function () {
                 bullet.destroy();
             }, 1500);
@@ -196,8 +196,10 @@ class Player extends Phaser.Physics.Arcade.Sprite{
 
     shield() {
         if (this.energy >= 10) {
+            this.scene.sound.play('shootin');
+            this.scene.sound.play('shootin');
             var shield = new Shield(this.scene, this.x +50 * this.sens, this.y - 10);
-            console.log("Shield");
+           // console.log("Shield");
             setTimeout(function () {
                 shield.destroy();
             }, 5000);
@@ -208,11 +210,14 @@ class Player extends Phaser.Physics.Arcade.Sprite{
     ramp() {
         //if (this.energy >= 25 && this.y>400) {
         if (this.energy >= 25 ) {
+            this.scene.sound.play('shootin');
+            this.scene.sound.play('shootin');
+            this.scene.sound.play('shootin');
                 this.rampActiv = new Ramp(this.scene, this.x + 126*this.sens, this.y+23);
 
             
             
-            console.log("Rampe");
+            //console.log("Rampe");
             this.energy -= 25;
         }
     }
@@ -225,7 +230,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
             this.anims.play('jumpback', true);
         }
         else { this.anims.play('jump', true); }
-        console.log(this.body.velocity);
+        //console.log(this.body.velocity);
         let here = this;
         setTimeout(function () {
             here.rampActiv.destroy();

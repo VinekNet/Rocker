@@ -51,6 +51,10 @@ class Tableau extends Phaser.Scene {
             'assets/rampe.png',
             { frameWidth: 128, frameHeight: 64 }
         );
+        this.load.spritesheet('shield',
+        'assets/shield.png',
+        { frameWidth: 32, frameHeight: 128 }
+    );
 
         this.load.audio('ded', 'assets/clunk.wav');
         this.load.audio('jump', 'assets/jump+.wav');
@@ -88,7 +92,7 @@ class Tableau extends Phaser.Scene {
         this.sound.add('kill');
 
 
-        console.log("On est sur " + this.constructor.name + " / " + this.scene.key);
+        //console.log("On est sur " + this.constructor.name + " / " + this.scene.key);
         /**
          * Le ciel en fond
          * @type {Phaser.GameObjects.Image}
@@ -102,8 +106,8 @@ class Tableau extends Phaser.Scene {
          * Le joueur
          * @type {Player}
          */
-        //this.player = new Player(this, 128, 485); //300 ou 485
-         this.player = new Player(this, 5635, 0   ); //300 ou 
+        this.player = new Player(this, 128, 485); //300 ou 485
+        // this.player = new Player(this, 5035, 0   ); //300 ou 
         this.boom = this.add.sprite(this.sys.canvas.width / 2, this.sys.canvas.height / 2, "boom")
         this.boom.displayWidth = 64;
         this.boom.displayHeight = 64;

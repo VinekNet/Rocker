@@ -12,7 +12,7 @@ class Ramp extends ObjetPhysique {
         this.key = 'default';
         this.anims.create({
             key: 'default',
-            frames: this.anims.generateFrameNumbers('Rampe', { start: 0, end: 1 }),
+            frames: this.anims.generateFrameNumbers('Rampe', { start: 0, end: 3 }),
             frameRate: 24,
             repeat: -1
         });

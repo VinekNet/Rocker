@@ -13,7 +13,7 @@ class Start extends Phaser.GameObjects.Container {
         let pad2 = scene.add.container();
 
         let starttext = scene.add.text(0+70, 0, "START", { font: "65px dpcomic", fill: "#ffffff", align: "center" });
-        console.log("onfaitstart");
+        //console.log("onfaitstart");
         let quittext = scene.add.text(50 + 70, 100, "QUIT", { font: "65px dpcomic", fill: "#ffffff", align: "center" });
 
         let starttextb = scene.add.text(-4 + 70, -2.5, "START", { font: "70px dpcomic", fill: "#37d6fb", align: "center" });

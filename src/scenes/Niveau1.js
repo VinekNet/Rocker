@@ -36,7 +36,7 @@ class Niveau1 extends Tableau{
         this.load.image('platformsz', 'assets/plateforme2.png');
         this.load.image('ground ', 'assets/sol.png')
         
-        this.load.image('shield', 'assets/shield.png');
+
         
         this.load.audio('zik3', 'assets/roof.wav');
         this.load.audio('zik2', 'assets/NeoF.wav');
@@ -461,7 +461,32 @@ class Niveau1 extends Tableau{
         else {
             this.mood3.volume = (((this.player.x - 2500) / (896 * 3))) / 3;
         }
-        //console.log((((this.player.x - 2500) / (896 * 3))) / 3);
+        if(5000<this.player.x&&this.player.x<6300){
+
+            if(this.player.y>300){
+                let me=this;
+                if(!me.player.isDead){
+                    me.player.isDead=true;
+                    me.player.visible=false;
+                    this.mood.stop();
+                    this.mood2.stop();
+                    this.mood3.stop();
+                    this.sound.play('ded');
+                    //ça saigne...
+                    me.saigne(me.player,function(){
+                        //à la fin de la petite anim, on relance le jeu
+                        me.boom.visible=false;
+                        me.player.anims.play('turn');
+                        me.player.isDead = false;
+                       
+                        me.scene.restart();
+
+                    })
+
+                }
+            }
+        }
+       //console.log(this.player.x)
         //console.log(this.mood3.volume);
 
         //FIN

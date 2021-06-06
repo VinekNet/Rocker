@@ -12,7 +12,7 @@
         this.load.image('energyMask', 'assets/ui/stormMask.png');
     }
     create (){
-        console.log("create Ui")
+        //console.log("create Ui")
 
         this.score=0;
         /**
